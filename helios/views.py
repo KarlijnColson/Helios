@@ -1854,3 +1854,38 @@ def ballot_list(request, election):
 
     # we explicitly cast this to a short cast vote
     return [v.last_cast_vote().ld_object.short.toDict(complete=True) for v in voters]
+
+##
+# stress test
+##
+
+@election_admin(frozen=False)
+def one_election_stress_test(request, election):
+    for i in range(0, 250):
+        voter_uuid = str(uuid.uuid4())
+        voter = Voter(uuid=voter_uuid, voter_name='Test Voter ' + str(i), voter_login_id=voter_uuid, election=election)
+        voter.generate_password()
+        voter.save()
+
+        ev = homomorphic.EncryptedVote.fromElectionAndAnswers(election, [[1]])
+        encrypted_vote = ev.ld_object.includeRandomness().toJSONDict()
+
+        vote = utils.to_json(encrypted_vote)
+
+        vote_fingerprint = cryptoutils.hash_b64(vote)
+
+        # prepare the vote to cast
+        cast_vote_params = {
+            'vote': vote,
+            'voter': voter,
+            'vote_hash': vote_fingerprint,
+            'cast_at': datetime.datetime.utcnow()
+        }
+
+        cast_vote = CastVote(**cast_vote_params)
+
+        cast_vote.save()
+
+        tasks.cast_vote_verify_and_store.delay(cast_vote_id=cast_vote.id, status_update_message=None)
+
+    return HttpResponseRedirect(settings.SECURE_URL_HOST + reverse(one_election_admin, args=[election.uuid]))

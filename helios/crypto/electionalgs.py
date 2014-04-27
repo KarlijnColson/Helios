@@ -204,7 +204,7 @@ class EncryptedAnswer(HeliosObject):
 
     def toJSONDict(self, with_randomness=False):
         value = {
-            'choices': [c.to_dict() for c in self.choices],
+            'choices': [c.to_string() for c in self.choices],
             'individual_proofs': [p.to_dict() for p in self.individual_proofs]
         }
 

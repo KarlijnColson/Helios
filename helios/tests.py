@@ -41,8 +41,7 @@ class ElectionModelTests(TestCase):
             admin=self.user)
 
     def setup_questions(self):
-        QUESTIONS = [{"answer_urls": [None, None, None], "answers": ["a", "b", "c"], "choice_type": "approval", "max": 1,
-                      "min": 0, "question": "w?", "result_type": "absolute", "short_name": "w?", "tally_type": "homomorphic"}]
+        QUESTIONS = [{"answer_urls": [None, None, None], "answers": ["a", "b", "c"], "choice_type": "approval", "max": 1, "min": 0, "question": "w?", "result_type": "absolute", "short_name": "w?", "tally_type": "homomorphic"}]
         self.election.questions = QUESTIONS
 
     def setup_trustee(self):
@@ -148,8 +147,7 @@ class ElectionModelTests(TestCase):
         # what about after saving?
         self.election.save()
         e = models.Election.objects.get(uuid=self.election.uuid)
-        self.assertEquals(
-            e.eligibility, [{'auth_system': self.user.user_type}])
+        self.assertEquals(e.eligibility, [{'auth_system': self.user.user_type}])
 
         self.election.openreg = True
 
@@ -161,8 +159,7 @@ class ElectionModelTests(TestCase):
         assert self.user.user_type in self.election.pretty_eligibility
 
     def test_facebook_eligibility(self):
-        self.election.eligibility = [{'auth_system': 'facebook', 'constraint': [
-            {'group': {'id': '123', 'name': 'Fake Group'}}]}]
+        self.election.eligibility = [{'auth_system': 'facebook', 'constraint': [{'group': {'id': '123', 'name': 'Fake Group'}}]}]
 
         # without openreg, this should be false
         self.assertFalse(self.election.user_eligible_p(self.fb_user))
@@ -180,8 +177,7 @@ class ElectionModelTests(TestCase):
         self.assertTrue(self.election.user_eligible_p(self.fb_user))
 
         # also check that eligibility_category_id does the right thing
-        self.assertEquals(
-            self.election.eligibility_category_id('facebook'), '123')
+        self.assertEquals(self.election.eligibility_category_id('facebook'), '123')
 
     def test_freeze(self):
         # freezing without trustees and questions, no good
@@ -220,12 +216,10 @@ class ElectionModelTests(TestCase):
         self.assertTrue(len(voters) == 0)
 
         # register the voter
-        voter = models.Voter.register_user_in_election(
-            self.user, self.election)
+        voter = models.Voter.register_user_in_election(self.user, self.election)
 
         # make sure voter is there now
-        voter_2 = models.Voter.get_by_election_and_user(
-            self.election, self.user)
+        voter_2 = models.Voter.get_by_election_and_user(self.election, self.user)
 
         self.assertFalse(voter == None)
         self.assertFalse(voter_2 == None)
@@ -236,8 +230,7 @@ class ElectionModelTests(TestCase):
         self.assertTrue(len(voters) == 1)
         self.assertEquals(voter, voters[0])
 
-        voter_2 = models.Voter.get_by_election_and_uuid(
-            self.election, voter.uuid)
+        voter_2 = models.Voter.get_by_election_and_uuid(self.election, voter.uuid)
         self.assertEquals(voter, voter_2)
 
         self.assertEquals(voter.user, self.user)
@@ -250,8 +243,7 @@ class VoterModelTests(TestCase):
         self.election = models.Election.objects.get(short_name='test')
 
     def test_create_password_voter(self):
-        v = models.Voter(uuid=str(uuid.uuid1()), election=self.election,
-                         voter_login_id='voter_test_1', voter_name='Voter Test 1', voter_email='foobar@acme.com')
+        v = models.Voter(uuid=str(uuid.uuid1()), election=self.election, voter_login_id='voter_test_1', voter_name='Voter Test 1', voter_email='foobar@acme.com')
 
         v.generate_password()
 

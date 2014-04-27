@@ -299,6 +299,9 @@ class BaseArrayOfObjects(LDObject):
     WRAPPED_OBJ_CLASS = list
 
     def __init__(self, wrapped_obj):
+        if not isinstance(wrapped_obj, list):
+            wrapped_obj = [wrapped_obj]
+
         super(BaseArrayOfObjects, self).__init__(wrapped_obj)
 
     def toDict(self, complete=False):
@@ -306,6 +309,7 @@ class BaseArrayOfObjects(LDObject):
 
     def loadData(self):
         "go through each item and LD instantiate it, as if it were a structured field"
+        #print self.wrapped_obj
         self.items = [self.instantiate(
             element, datatype=self.ELEMENT_TYPE) for element in self.wrapped_obj]
 
