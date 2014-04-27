@@ -90,5 +90,5 @@ urlpatterns = patterns('',
   (r'^/ballots/(?P<voter_uuid>[^/]+)/last$', voter_last_vote),
 
   # stress test
-  (r'^/stress-test', one_election_stress_test),
+  (r'^/stress_test', one_election_stress_test),
 )

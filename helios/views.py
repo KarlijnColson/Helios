@@ -1859,7 +1859,7 @@ def ballot_list(request, election):
 # stress test
 ##
 
-@election_admin(frozen=False)
+@election_admin()
 def one_election_stress_test(request, election):
     for i in range(0, 250):
         voter_uuid = str(uuid.uuid4())
