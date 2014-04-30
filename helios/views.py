@@ -17,6 +17,7 @@ import csv
 import urllib
 import os
 import base64
+import random
 
 from crypto import algs, electionalgs, elgamal
 from crypto import utils as cryptoutils
@@ -1867,7 +1868,7 @@ def one_election_stress_test(request, election):
         voter.generate_password()
         voter.save()
 
-        ev = homomorphic.EncryptedVote.fromElectionAndAnswers(election, [[1]])
+        ev = homomorphic.EncryptedVote.fromElectionAndAnswers(election, [[round(random.random())], [round(random.random())], [round(random.random())]])
         encrypted_vote = ev.ld_object.includeRandomness().toJSONDict()
 
         vote = utils.to_json(encrypted_vote)
