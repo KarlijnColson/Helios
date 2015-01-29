@@ -70,9 +70,9 @@ function verify_single_ballot(election_url, audit_trail) {
     $('#loading').hide();
     
     if (overall_result) {
-       result_append('SUCCESSFUL VERIFICATION, DONE!');
+       result_append('<FONT COLOR="#008B00"> <b>SUCCESSFUL VERIFICATION, DONE!</b></FONT>');
     } else {
-       result_append('PROBLEM - THIS BALLOT DOES NOT VERIFY.');        
+       result_append('<FONT COLOR="#8B0000"> <b> PROBLEM - THIS BALLOT DOES NOT VERIFY.</b></FONT>');        
     }
   };
 
@@ -134,13 +134,19 @@ Enter the Election URL:
     <input type="text" size="50" name="election_url" id="election_url" /><br />
 
 <p>
-Your Ballot:
+Paste your Ballot Info here (Right-mouseclick+Paste OR CTRL+V):
 </p>
 
 <textarea name="audit_trail" cols="80" rows="7">
-</textarea><br /><br />
+</textarea>
+<br />
+<br />
+
 <input type="submit" class="pretty" value="Verify" />
 </form>
+<p> P.s.: Try and change a number in the ballot, is the verifier still corect?</p> <br />
+
+ <p><b>If you're done verifying you can close this window.</b> </p>
 
 <br /><br />
 <div id="results">

@@ -1,10 +1,60 @@
-{#if $T.election_metadata.use_advanced_audit_features}
-  <div style="float: right; background: lightyellow; margin-left: 20px; padding: 0px 10px; border: 1px solid #ddd; width:200px;">
-    <h4><a onclick="$('#auditbody').slideToggle(250);" href="#">Audit</a> <span style="font-size: 0.8em; color: #444">[Optional]</span></h4>
+<h1>Review Your Ballot</h1>
 
-    <div id="auditbody" style="display:none;">
+<h3><u>Your choices: </u></h2>
+
+{#if $T.election_type != 'ranked election'}
+  {#foreach $T.questions as question}
+    <p>
+      <b style="font-size:1.4em;">
+        #{$T.question$index + 1}: {$T.question.short_name}
+	[ <a onclick="BOOTH.show_question({$T.question$index}); return false;" href="#">Edit</a> ] <br />
+      </b>
+
+      <b style="font-size:1.4em;">
+        {#foreach $T.choices[$T.question$index] as choice}
+	 <ul>
+          <li>{$T.choice}</li>
+        {#/for}
+	</ul>
+      </b>
+      {#if $T.choices[$T.question$index].length == 0}
+	&nbsp;&nbsp;&nbsp;
+	<FONT COLOR="#8B0000"><b>You didn't vote, are you sure you want to cast an invalid vote?</FONT></b>
+      {#elseif $T.choices[$T.question$index].length < $T.question.max}
+        &nbsp;&nbsp;&nbsp;
+        [You under-voted: you may select up to {$T.question.max}.]
+      {#/if}
+
+      &nbsp;&nbsp;&nbsp;
+
+    </p>
+  {#/for}
+{#else}
+  {#foreach $T.questions as question}
+    {$T.index = 1;}
+    <p>
+	<b style="font-size:1.4em;">
+      #{$T.question$index + 1}</u>: {$T.question.short_name}
+	[<a onclick="BOOTH.show_question({$T.question$index}); return false;" href="#">Edit</a>] <br />
+      <b style="font-size:1.4em;">
+        {#foreach $T.choices[$T.question$index] as choice}
+ 	  <ul>
+          <li>{$T.index++}.{$T.choice}</li>
+        {#/for}
+	</ul>
+      </b>
+
+      &nbsp;&nbsp;&nbsp;
+    </p>
+  {#/for}
+{#/if}
+
+<br /><br />
+{#if $T.election_metadata.use_advanced_audit_features}
+  <div style="float: left; background: lightyellow; margin-left: 50px; padding: 10px 10px; border: 1px solid #ddd; width:200px;">
+  <b><font size="6"> Audit </b></font> </a> <span style="font-size: 0.8em; color: #444">[Optional]</span>
       <p>
-        If you choose, you can audit your ballot and reveal how your choices were encrypted.
+        If you choose, you can audit your vote and reveal how your choices were encrypted.This way you can check for corruption or inconsistencies.
       </p>
 
       <p>
@@ -12,63 +62,19 @@
       </p>
 
       <input type="button" value="Verify Encryption" onclick="BOOTH.audit_ballot();" class="pretty" />
-    </div>
   </div>
 {#/if}
 
-<h3>Review Your Ballot</h3>
+ <div style="float: left; background: lightyellow; margin-left: 50px; padding: 10px 10px; border: 1px solid #ddd; width:200px;">
+  <b><font size="6"> Submit </b></font> </a>
+      <p>
+        If you're happy with your vote you can submit it here.
+      </p>
 
-<h4>Smart Ballot Tracker</h4>
+      <p>
+        If you submit your vote you will be asked to login.
+      </p>
 
-<p>
-  You can take note of your smart ballot tracker [<a onclick="BOOTH.show_receipt(); return false;" href="#">Print</a>]:
 
-  <br />
-  <br />
-
-  <b><tt style="font-size: 16pt;">&nbsp;&nbsp;&nbsp;{$T.encrypted_vote_hash}</tt></b>
-</p>
-
-<h4>Choices</h4>
-
-{#if $T.election_type != 'ranked election'}
-  {#foreach $T.questions as question}
-    <p>
-      <u>#{$T.question$index + 1}</u>: {$T.question.short_name}<br />
-
-      <b style="font-size:1.4em;">
-        {#foreach $T.choices[$T.question$index] as choice}
-          {$T.choice}{#if !$T.choice$last}, {#/if}
-        {#/for}
-      </b>
-
-      {#if $T.choices[$T.question$index].length < $T.question.max}
-        &nbsp;&nbsp;&nbsp;
-        [You under-voted: you may select up to {$T.question.max}.]
-      {#/if}
-
-      &nbsp;&nbsp;&nbsp;
-
-      [<a onclick="BOOTH.show_question({$T.question$index}); return false;" href="#">Edit</a>]
-    </p>
-  {#/for}
-{#else}
-  {#foreach $T.questions as question}
-    {$T.index = 1;}
-    <p>
-      <u>Question #{$T.question$index + 1}</u>: {$T.question.short_name}<br />
-      <b style="font-size:1.4em;">
-        {#foreach $T.choices[$T.question$index] as choice}
-          {$T.index++}.{$T.choice}
-          <br />
-        {#/for}
-      </b>
-
-      &nbsp;&nbsp;&nbsp;
-
-      [<a onclick="BOOTH.show_question({$T.question$index}); return false;" href="#">update</a>]
-    </p>
-  {#/for}
-{#/if}
-
-<button onclick="BOOTH.cast_ballot();">Confirm Choices</button>
+      <input type="button" value="Submit Vote" onclick="BOOTH.cast_ballot();" class="pretty" />
+  </div>

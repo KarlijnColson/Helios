@@ -43,7 +43,7 @@
       <script language="javascript">
         // utils
         BOOTH = {};
-
+	// function to set the templates
         BOOTH.setup_templates = function() {
           if (BOOTH.templates_setup_p)
             return;
@@ -59,9 +59,10 @@
           $('#footer').setTemplateURL('templates/footer.html' + cache_bust);
 
           BOOTH.templates_setup_p = true;
+	  BOOTH.show_progress('1');
         };
 
-        // set up the message when navigating away
+        // set up the message when navigating away (warnings to users)
         BOOTH.started_p = false;
 
         window.onbeforeunload = function(evt) {
@@ -78,14 +79,14 @@
 
           return message;
         };
-
+	// function for confirmation when exiting.
         BOOTH.exit = function() {
           if (confirm('Are you sure you want to exit the booth and lose all information about your current ballot?')) {
             BOOTH.started_p = false;
             window.location = BOOTH.election.cast_url;
           }
         };
-
+	//function setup ballot
         BOOTH.setup_ballot = function(election) {
           BOOTH.ballot = {};
 
@@ -101,18 +102,18 @@
           });
         };
 
-        // all ciphertexts to null
+        // function to set all ciphertexts to null
         BOOTH.reset_ciphertexts = function() {
           _(BOOTH.encrypted_answers).each(function(enc_answer, ea_num) {
             BOOTH.launch_async_encryption_answer(ea_num);
           });
         };
-
+	// function log
         BOOTH.log = function(msg) {
           if (typeof(console) != undefined)
             console.log(msg);
         };
-
+	// function setup workers
         BOOTH.setup_workers = function(election_raw_json) {
           // async?
           if (!BOOTH.synchronous) {
@@ -156,7 +157,7 @@
         function escape_html(content) {
           return $('<div/>').text(content).html();
         }
-
+	// function to setup election (why all grey??)
         BOOTH.setup_election = function(raw_json, election_metadata) {
           // IMPORTANT: we use the raw JSON for safer hash computation
           // so that we are using the JSON serialization of the SERVER
@@ -205,16 +206,19 @@
           BOOTH.setup_ballot();
         };
 
+	// function to show? 
         BOOTH.show = function(el) {
           $('.panel').hide();
           el.show();
           return el;
         };
-
+	
+	// function to show election
         BOOTH.show_election = function() {
           BOOTH.show($('#election_div')).processTemplate({'election' : BOOTH.election});
         };
 
+	//function launch
         BOOTH.launch_async_encryption_answer = function(question_num) {
           BOOTH.answer_timestamps[question_num] = new Date().getTime();
           BOOTH.encrypted_answers[question_num] = null;
@@ -227,10 +231,10 @@
           });
         };
 
-        // check if the current question is ok
+        // function to check if the current question is ok
         BOOTH.validate_question = function(question_num) {
           // check if enough answers are checked
-          if (BOOTH.ballot.answers[question_num].length < BOOTH.election.questions[question_num].min)
+          if (BOOTH.ballot.answers[question_num].length < 		BOOTH.election.questions[question_num].min)
             return false;
 
           // if we need to launch the worker, let's do it
@@ -245,6 +249,7 @@
           return true;
         };
 
+	//function to validate and confirm
         BOOTH.validate_and_confirm = function(question_num) {
           if (BOOTH.validate_question(question_num))
             BOOTH.seal_ballot();
@@ -286,7 +291,7 @@
           if (question_num == BOOTH.election.questions.length -1)
             BOOTH.all_questions_seen = true;
 
-          BOOTH.show_progress('1');
+          BOOTH.show_progress('2');
           BOOTH.show($('#question_div')).processTemplate({
             'question_num': question_num,
             'last_question_num': BOOTH.election.questions.length - 1,
@@ -374,7 +379,7 @@
         };
 
         BOOTH.show_encryption_message_before = function(func_to_execute) {
-          BOOTH.show_progress('2');
+          BOOTH.show_progress('3');
           BOOTH.show($('#encrypting_div'));
           func_to_execute();
         };
@@ -405,7 +410,7 @@
 
         BOOTH.show_progress = function(step_num) {
           $('#progress_div').show();
-          $(['1','2','3','4']).each(function(n, step) {
+          $(['1','2','3','4','5']).each(function(n, step) {
             if (step == step_num) {
               $('#progress_' + step).attr('class', 'selected');
             } else {
@@ -464,7 +469,7 @@
             'election_metadata': BOOTH.election_metadata,
             'encrypted_vote_hash': BOOTH.encrypted_ballot_hash,
           });
-          BOOTH.show_progress('2');
+          BOOTH.show_progress('3');
         };
 
         BOOTH.check_encryption_status = function() {
@@ -564,7 +569,7 @@
         };
 
         BOOTH.seal_ballot = function() {
-          BOOTH.show_progress('2');
+          BOOTH.show_progress('3');
 
           // if we don't have the ability to do crypto in the browser,
           // we use the server
@@ -577,6 +582,7 @@
         };
 
         BOOTH.audit_ballot = function() {
+	  BOOTH.show_progress('4');
           BOOTH.audit_trail = BOOTH.encrypted_ballot_with_plaintexts_serialized || $.toJSON(BOOTH.encrypted_ballot.get_audit_trail());
           BOOTH.show($('#audit_div')).processTemplate({'audit_trail' : BOOTH.audit_trail, 'election_url' : BOOTH.election_url});
         };
@@ -586,9 +592,10 @@
         };
 
         BOOTH.cast_ballot = function() {
+	  BOOTH.show_progress('5');
           // show progress spinner
           $('#loading_div').show();
-          $('#proceed_button').attr('disabled', 'disabled');
+          $('#proceed_button').attr('disabled', 'disabled', 'disabled', 'disabled');
 
           // at this point, we delete the plaintexts by resetting the ballot
           BOOTH.setup_ballot(BOOTH.election);
@@ -620,9 +627,9 @@
       </script>
 
       <div id="page">
-        <div id="progress_div" style="display:none; width: 500px; margin:auto;">
+        <div id="progress_div" style="display:none; width: 600px; margin:auto;">
           <table width="100%">
-            <tr><td id="progress_1">(1) Select</td><td id="progress_2">(2) Review</td><td id="progress_3">(3) Submit</td></tr>
+            <tr><td id="progress_1">1. Instructions</td><td id="progress_2">2. Select</td><td id="progress_3">3. Overview</td><td id="progress_4">(4. Audit)</td><td id="progress_5">5. Submit</td></tr>
           </table>
         </div>
 

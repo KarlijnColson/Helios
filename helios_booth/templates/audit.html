@@ -1,18 +1,14 @@
-<h3>Your Audited Ballot</h3>
+<h3>Audit your ballot: </h3>
+
 
 <p>
-  <b><u>IMPORTANT</u></b>: this ballot, now that it has been audited, <em>will not be tallied</em>.
-  <br />
-  To cast a ballot, you must click the "Back to Voting" button below, re-encrypt it, and choose "cast" instead of "audit."
-</p>
-
-<p>
-  <b>Why?</b> Helios prevents you from auditing and casting the same ballot to provide you with some protection against coercion.
-</p>
-
-<p>
-  <b>Now what?</b> <a onclick="$('#audit_trail').select(); return false;" href="#">Select your ballot audit info</a>, copy it to your clipboard, then use the <a target="_blank" href="single-ballot-verify.html?election_url={$T.election_url}">ballot verifier</a> to verify it.<br />
-  Once you're satisfied, click the "back to voting" button to re-encrypt and cast your ballot.
+  <b>HOW?</b> 
+    <ol>
+      <li>Select your ballot audit info by clicking <a onclick="$('#audit_trail').select(); return false;" href="#">here</a> </li>
+      <li>copy the info to your clipboard (right-mouse click+Copy OR CTRL+C)</li> 
+      <li>use the <a target="_blank" href="single-ballot-verify.html?election_url={$T.election_url}">ballot verifier</a> to verify the info.</li>
+    </ol>
+  Once you're satisfied, click the "back to voting" button to re-encrypt and cast your ballot.You can also choose to post your ballot to the ballot tracking center. 
 </p>
 
 <form action="#">
@@ -23,16 +19,33 @@
   <br />
   <br />
 
-  Before going back to voting,<br />
+<div style="float: left; background: lightyellow; margin-left: 50px; margin-right: 50px; padding: 10px 10px; border: 1px solid #ddd; width:200px;">
+  <b><font size="5"> Post ballot </b></font> </a> <span style="font-size: 0.8em; color: #444">[Optional]</span>
+      <p>
+       Before going back to voting,<br />
   you can post this audited ballot to the Helios tracking center so that others might double-check the verification of this ballot.
+      </p>
+      <p>
+	<b>Even if you post your audited ballot, you must go back to voting and choose "Submit vote" if you want your vote to count.</b>
+      </p>
+
+      <input type="button" value="Post Ballot" onclick="$(this).attr('disabled', 'disabled');BOOTH.post_audited_ballot();" id="post_audited_ballot_button" class="pretty" />
+  </div>
 
   <br />
   <br />
-
-  <b>Even if you post your audited ballot, you must go back to voting and choose "cast" if you want your vote to count.</b>
-
   <br />
   <br />
 
-  <input type="button" value="Post Audited Ballot to Tracking Center" onclick="$(this).attr('disabled', 'disabled');BOOTH.post_audited_ballot();" id="post_audited_ballot_button" class="pretty" />&nbsp;&nbsp;&nbsp;<input type="button" value="Back to Voting" onclick="BOOTH.reset_ciphertexts();BOOTH.seal_ballot();" class="pretty" />
+<p>
+  <b><u>IMPORTANT</u></b>: this ballot, now that it has been audited, <em>can not be tallied</em>.
+  <br />
+  To cast a vote, you must click the "Back to Voting" button below, re-encrypt is done automatically, and choose "Submit Vote" instead of "Verify Encryption".
+</p>
+<p>
+  <b>Why?</b> By performing an audit your your encryption as well as the randomness is made public, this means people can figure out your vote. Therefore a new encryption has to be made.  
+  <br />
+  <br />
+
+ <input type="button" value="Back to Voting" onclick="BOOTH.reset_ciphertexts();BOOTH.seal_ballot();" class="pretty" />
 </form>
