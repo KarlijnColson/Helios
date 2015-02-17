@@ -71,9 +71,15 @@ function verify_single_ballot(election_url, audit_trail) {
     
     if (overall_result) {
        result_append('<FONT COLOR="#008B00"> <b>SUCCESSFUL VERIFICATION, DONE!</b></FONT>');
+	result_append('To be totally sure of correctness check the following:');
+	result_append('1. check if the election fingerprint is the same as in the invitation e-mail you recieved.');
+	result_append('2. Make sure the verification-code is the same as the one you noted down.');
+	  result_append("<br />");
     } else {
-       result_append('<FONT COLOR="#8B0000"> <b> PROBLEM - THIS BALLOT DOES NOT VERIFY.</b></FONT>');        
+       result_append('<FONT COLOR="#8B0000"> <b> PROBLEM - THIS BALLOT DOES NOT VERIFY.</b></FONT>');
+	result_append("<br />");       
     }
+    
   };
 
   // the hash will be computed within the setup function call now
@@ -144,8 +150,7 @@ Paste your Ballot Info here (Right-mouseclick+Paste OR CTRL+V):
 
 <input type="submit" class="pretty" value="Verify" />
 </form>
-<p> P.s.: Try and change a number in the ballot, is the verifier still corect?</p> <br />
-
+<p> P.s.: Try and change a number in the ballot, is the verifier still corect?</p> 
  <p><b>If you're done verifying you can close this window.</b> </p>
 
 <br /><br />

@@ -1,6 +1,17 @@
-<h1>Review Your Ballot</h1>
+<h1>Review Your Vote</h1>
 
-<h3><u>Your choices: </u></h2>
+<h3><u>Your verification-code:</u></h3>
+<br />
+<b><tt style="font-size: 18pt;">&nbsp;&nbsp;&nbsp;{$T.encrypted_vote_hash}</tt></b>
+<br />
+<p><font size="5">
+  with the help of this verification code, you can verify whether your vote is correctly counted. For this please write down this verification-code or use [<a onclick="BOOTH.show_receipt(); return false;" href="#">Print</a>].
+ </font>
+  <br />
+  <br />
+</p>
+
+<h3><u>Your choices: </u></h3>
 
 {#if $T.election_type != 'ranked election'}
   {#foreach $T.questions as question}
@@ -52,13 +63,13 @@
 <br /><br />
 {#if $T.election_metadata.use_advanced_audit_features}
   <div style="float: left; background: lightyellow; margin-left: 50px; padding: 10px 10px; border: 1px solid #ddd; width:200px;">
-  <b><font size="6"> Audit </b></font> </a> <span style="font-size: 0.8em; color: #444">[Optional]</span>
+  <b><font size="6"> Verification </b></font> </a>
       <p>
-        If you choose, you can audit your vote and reveal how your choices were encrypted.This way you can check for corruption or inconsistencies.
+        If you choose, you can verify your vote and reveal how your choices were encrypted.This way you can check for corruption or inconsistencies.
       </p>
 
       <p>
-        You will then be guided to re-encrypt your choices for final casting.
+        You can repeat this process as many times as you want until you are convinced this vote system functions correctly.
       </p>
 
       <input type="button" value="Verify Encryption" onclick="BOOTH.audit_ballot();" class="pretty" />
