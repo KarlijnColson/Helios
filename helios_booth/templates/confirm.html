@@ -23,14 +23,12 @@
 
       <b style="font-size:1.4em;">
         {#foreach $T.choices[$T.question$index] as choice}
-	 <ul>
           <li>{$T.choice}</li>
         {#/for}
-	</ul>
       </b>
       {#if $T.choices[$T.question$index].length == 0}
 	&nbsp;&nbsp;&nbsp;
-	<FONT COLOR="#8B0000"><b>You didn't vote, are you sure you want to cast an invalid vote?</FONT></b>
+	<FONT COLOR="#8B0000"><b>You didn't vote, are you sure you want to cast a blanco vote?</FONT></b>
       {#elseif $T.choices[$T.question$index].length < $T.question.max}
         &nbsp;&nbsp;&nbsp;
         [You under-voted: you may select up to {$T.question.max}.]
