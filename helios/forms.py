@@ -49,5 +49,5 @@ class ThresholdSchemeForm(forms.Form):
 
 
 class VoterPasswordForm(forms.Form):
-    voter_id = forms.CharField(max_length=50, label='Voter ID')
+    voter_id = forms.CharField(label='Voter ID', max_length=50)
     password = forms.CharField(widget=forms.PasswordInput(), max_length=100)
