@@ -8,7 +8,7 @@ body {
 #wrapper {
   position: absolute;
   padding: 0px;
-  background: white;
+  background: black;
   border: 1px solid #666;
   top: 30px;
   left: 50%;
@@ -69,6 +69,30 @@ body {
 }
 
 #progress_div td.selected {
+  background: #fc9;
+  color: black;
+  font-weight: bold;
+  border: 1px solid black;
+}
+
+#progressNL_div {
+  width: 100%;
+  font-size: 14pt;
+}
+
+#progressNL_div table {
+  border-collapse: collapse;
+  text-align: center;
+  border: 0px;
+}
+
+#progressNL_div td.unselected {
+  background: #ccc;
+  color: #888;
+  border: 1px solid #333;
+}
+
+#progressNL_div td.selected {
   background: #fc9;
   color: black;
   font-weight: bold;

@@ -1,17 +1,17 @@
-<h3>Audit your ballot: </h3>
-
+<img src="Media/4_flow_verify.png" width="50%"/>
+<h3>Verify your vote: </h3>
 
 <p>
 <b>HOW?</b> 
   <ol>
-  <li>Select your ballot audit info by clicking <a onclick="$('#audit_trail').select(); return false;" href="#">here</a> </li>
+  <li>Select your vote verification info by clicking <a onclick="$('#audit_trail').select(); return false;" href="#">here</a> </li>
 
-  <li>copy the info to your clipboard (right-mouse click+Copy OR CTRL+C)</li>
+  <li>copy this info to your clipboard (right-mouse click+Copy OR CTRL+C)</li>
  
-  <li>use the <a target="_blank" href="single-ballot-verify.html?election_url={$T.election_url}">ballot verifier</a> to verify the info.</li>
+  <li>use the <a target="_blank" href="single-ballot-verify.html?election_url={$T.election_url}">Vote verifier</a> to verify the info.</li>
   </ol>
   
-Once you're satisfied, click the "back to voting" button to re-encrypt your vote. You can then choose to cast your vote or verify it again. Before you go back to the voting system you can also post your ballot to the ballot tracking center. 
+Once you're satisfied, click the "back to voting" button to re-encrypt your vote. You can then choose to cast your vote or verify it again. Before you go back to the voting system you can also post this vote to the a list of verified votes, this way anyone can verify this vote again. 
 </p>
 
 <form action="#">
@@ -32,7 +32,11 @@ Once you're satisfied, click the "back to voting" button to re-encrypt your vote
 	<b>Even if you post your verified vote, you must go back to voting and choose "Submit vote" if you want your vote to count.</b>
       </p>
 
-      <input type="button" value="Post Ballot" onclick="$(this).attr('disabled', 'disabled');BOOTH.post_audited_ballot();" id="post_audited_ballot_button" class="pretty" />
+      <input type="button" value="Post verified vote" onclick="$(this).attr('disabled', 'disabled');BOOTH.post_audited_ballot();" id="post_audited_ballot_button" class="pretty" />
+
+<div id="confirmation_box" style="color: green; text-align:center; font-size: 1.4em; padding-top:10px; padding-bottom: 10px; height:50px;">
+  </div>
+
   </div>
 
   <br />
@@ -41,14 +45,14 @@ Once you're satisfied, click the "back to voting" button to re-encrypt your vote
   <br />
 
 <p>
-  <b><u>IMPORTANT</u></b>: this ballot, now that it has been verified, <em>can not be counted</em>.
+  <b><u>IMPORTANT</u></b>: this vote, now that it has been verified, <em>can not be counted</em>.
   <br />
-  To cast a vote, you must click the "Back to Voting" button below, re-encryption is done automatically, and choose "Submit Vote" instead of "Verify Encryption".
+  To submit a vote, you must click the "Back to Voting" button below, re-encryption is done automatically, and choose "Submit Vote" instead of "Verify Encryption".
 </p>
 <p>
-  <b>Why re-encryption?</b> By performing an audit your encryption as well as the randomness is made public, this means people can figure out your vote. Therefore a new encryption has to be made.  
+  <b>Why re-encryption?</b> By performing an verification your encryption as well as the randomness is made public, this means people can figure out who you voted for. Therefore a new encryption has to be made.  
   <br />
   <br />
 
- <input type="button" value="Back to Voting" onclick="BOOTH.reset_ciphertexts();BOOTH.seal_ballot();" class="pretty" />
+ <input type="button" value="Back to Overview" onclick="BOOTH.reset_ciphertexts();BOOTH.seal_ballot();" class="pretty" />
 </form>

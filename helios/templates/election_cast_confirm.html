@@ -1,5 +1,5 @@
 {% extends TEMPLATE_BASE %}
-{% block title %}Confirm Your Vote in {{election.name}}{% endblock %}
+{% block title %}Submit Your Vote in {{election.name}}{% endblock %}
 
 {% load foundation %}
 
@@ -22,7 +22,7 @@
       if (typeof evt == 'undefined')
         evt = window.event;
 
-      var message = 'You have not yet cast your ballot! Make sure to complete the voting process if you want your vote to count.';
+      var message = 'You have not yet cast your vote! Make sure to complete the voting process if you want your vote to count.';
 
       if (evt)
         evt.returnValue = message;
@@ -52,7 +52,7 @@
                   {% endif %}
 
                   <p>
-                    We have received, <b>but not yet recorded</b>, your encrypted ballot. <b>To upload your encrypted ballot to the server, please click on the button below.</b>
+                    We have received, <b>but not yet recorded</b>, your encrypted vote. <b>To upload your encrypted vote to the server, please click on the button below.</b>
                   </p>
 
                   <div align="center">
@@ -61,7 +61,7 @@
 
                   <div id="waiting_div">
                     <p>
-                      Verifying and casting your ballot...
+                      Verifying and casting your vote...
                     </p>
 
                     <p class="text-center">
@@ -70,12 +70,12 @@
                   </div>
 
                   <div data-alert class="alert-box warning">
-                    You can cast as many ballots as you want: only the last one counts.
+                    You can cast as many votes as you want: only the last one counts.
                   </div>
                 </form>
 
                 <p>
-                  If you cancel now, your ballot will <b>not</b> be recorded. You can start the voting process over again, of course.
+                  If you cancel now, your vote will <b>not</b> be recorded. You can start the voting process over again, of course.
                 </p>
 
                 <a class="tiny secondary button" href="{% url helios.views.one_election_view election.uuid %}">Cancel</a>
@@ -132,7 +132,7 @@
               <a class="button" href="{% url helios.views.one_election_view election.uuid %}">Return to Election Info</a>
             {% else %}
               <p>
-                Now, we need you to log in, so we can verify your eligibility. Don't worry, we'll remember your ballot while you log in.
+                Now, we need you to log in, so we can verify your eligibility. Don't worry, we'll remember your vote while you log in.
               </p>
 
               {% if election.openreg %}

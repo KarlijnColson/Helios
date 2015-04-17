@@ -1,3 +1,5 @@
+<img src="Media/2_flow_select.png" width="50%"/>
+
 <form onsubmit="return false;" class="prettyform" id="answer_form">
   <input type="hidden" name="question_num" value="{$T.question_num}" />
 
@@ -12,10 +14,10 @@
         &mdash;
         You can choose
         {#if $T.question.min && $T.question.min > 0}
-          {#if $T.question.max}
-            {$T.question.min} to {$T.question.max}
+          {#if $T.question.max && $T.question.max > $T.question.min}
+            {$T.question.min} to {$T.question.max} - you need to select the minimum before you can continue.
           {#else}
-            at least {$T.question.min}
+            at least {$T.question.min} - you need to select the minimum before you can continue. 
           {#/if}
         {#else}
           {#if $T.question.max}

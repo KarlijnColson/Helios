@@ -58,7 +58,7 @@ function verify_single_ballot(election_url, audit_trail) {
 
   // quick and dirty detection of cast ballot
   if (encrypted_vote_json['cast_at']) {
-    result_append("\n\nIt looks like you are trying to verify a cast ballot. That can't be done, only audited ballots can be verified.");
+    result_append("\n\nIt looks like you are trying to verify a submitted vote. That can't be done, only verified votes can be verified.");
     return;
   }
   
@@ -77,6 +77,7 @@ function verify_single_ballot(election_url, audit_trail) {
 	  result_append("<br />");
     } else {
        result_append('<FONT COLOR="#8B0000"> <b> PROBLEM - THIS BALLOT DOES NOT VERIFY.</b></FONT>');
+	result_append('If this verification should be correct, please contact the administrator of the election.');
 	result_append("<br />");       
     }
     
@@ -132,7 +133,7 @@ At this time, the Java plugin is required for browser-based ballot auditing, alt
 
 <div id="verifier" style="display:none;">
 <p style="font-size: 16pt;">
-    This single-ballot verifier lets you enter an audited ballot<br />and verify that it was prepared correctly.
+    This single-ballot verifier lets you enter an encrypted vote<br />and verifies whether it was prepared correctly.
 </p>
 
 <form onsubmit="try {verify_single_ballot(this.election_url.value, this.audit_trail.value);} catch (e) {E = e;} return false;">
@@ -140,7 +141,7 @@ Enter the Election URL:
     <input type="text" size="50" name="election_url" id="election_url" /><br />
 
 <p>
-Paste your Ballot Info here (Right-mouseclick+Paste OR CTRL+V):
+Paste your Vote Info here (Right-mouseclick+Paste OR CTRL+V):
 </p>
 
 <textarea name="audit_trail" cols="80" rows="7">
@@ -150,7 +151,7 @@ Paste your Ballot Info here (Right-mouseclick+Paste OR CTRL+V):
 
 <input type="submit" class="pretty" value="Verify" />
 </form>
-<p> P.s.: Try and change a number in the ballot, is the verifier still corect?</p> 
+<p> P.s.: Try and change a number in the vote, is the verifier still corect?</p> 
  <p><b>If you're done verifying you can close this window.</b> </p>
 
 <br /><br />

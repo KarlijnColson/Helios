@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
 
-  <title>Helios Voting Booth</title>
+  <title>Helios</title>
 
   <link rel="stylesheet" type="text/css" href="css/booth.css" />
   <link rel="stylesheet" type="text/css" href="css/forms.css" />
@@ -34,8 +34,10 @@
 <body>
   <div id="wrapper">
     <span style="float:right; padding: 7px 15px 5px 10px;">[<a href="javascript:BOOTH.exit();">Exit</a>]</span>
+    <span style="float:right; padding: 7px 15px 5px 10px;">[<a href="javascript:BOOTH.show_instructions();">Instructions-ENG</a>]</span>
+    <span style="float:right; padding: 7px 15px 5px 10px;">[<a href="javascript:BOOTH.show_instructionsNL();">Instructies-NL</a>]</span>
 
-    <div id="banner">Helios Voting Booth</div>
+    <div id="banner">Helios</div>
 
     <div id="content">
       <div id="header"></div>
@@ -51,15 +53,20 @@
           var cache_bust = '?cb=' + new Date().getTime();
 
           $('#header').setTemplateURL('templates/header.html' + cache_bust);
-          $('#election_div').setTemplateURL('templates/election.html' + cache_bust);
+	  $('#choose_div').setTemplateURL('templates/language.html' + cache_bust);
+          $('#instr_div').setTemplateURL('templates/instructions.html' + cache_bust);
+	  $('#instrNL_div').setTemplateURL('templates/NL/instructions_nl.html' + cache_bust);
           $('#question_div').setTemplateURL('templates/question.html' + cache_bust);
+	  $('#questionNL_div').setTemplateURL('templates/NL/question_nl.html' + cache_bust);
           $('#confirm_div').setTemplateURL('templates/confirm.html' + cache_bust);
+	  $('#confirmNL_div').setTemplateURL('templates/NL/confirm_nl.html' + cache_bust);
           $('#seal_div').setTemplateURL('templates/seal.html' + cache_bust);
           $('#audit_div').setTemplateURL('templates/audit.html' + cache_bust);
+	  $('#auditNL_div').setTemplateURL('templates/NL/audit_nl.html' + cache_bust);
           $('#footer').setTemplateURL('templates/footer.html' + cache_bust);
 
           BOOTH.templates_setup_p = true;
-	  BOOTH.show_progress('1');
+	  
         };
 
         // set up the message when navigating away (warnings to users)
@@ -86,6 +93,7 @@
             window.location = BOOTH.election.cast_url;
           }
         };
+
 	//function setup ballot
         BOOTH.setup_ballot = function(election) {
           BOOTH.ballot = {};
@@ -213,10 +221,11 @@
           return el;
         };
 	
-	// function to show election
-        BOOTH.show_election = function() {
-          BOOTH.show($('#election_div')).processTemplate({'election' : BOOTH.election});
-        };
+	// KARLIJN: Funtion to show language 
+	 BOOTH.show_choose = function() {
+	 BOOTH.show($('#choose_div')).processTemplate({'election' : BOOTH.election});	
+	};
+
 
 	//function launch
         BOOTH.launch_async_encryption_answer = function(question_num) {
@@ -234,7 +243,7 @@
         // function to check if the current question is ok
         BOOTH.validate_question = function(question_num) {
           // check if enough answers are checked
-          if (BOOTH.ballot.answers[question_num].length < 		BOOTH.election.questions[question_num].min)
+          if (BOOTH.ballot.answers[question_num].length < BOOTH.election.questions[question_num].min)
             return false;
 
           // if we need to launch the worker, let's do it
@@ -247,6 +256,21 @@
           }
 
           return true;
+        };
+
+	// function to show instructions.
+        BOOTH.show_instructions = function() {
+	  
+          BOOTH.show($('#instr_div')).processTemplate({'election' : BOOTH.election});
+	  language = 0;
+	  BOOTH.show_progress('1');
+        };
+
+	// function to show instructions in NL.
+        BOOTH.show_instructionsNL = function() {
+          BOOTH.show($('#instrNL_div')).processTemplate({'election' : BOOTH.election});
+	  language = 1;
+	  BOOTH.show_progress('1');
         };
 
 	//function to validate and confirm
@@ -292,6 +316,7 @@
             BOOTH.all_questions_seen = true;
 
           BOOTH.show_progress('2');
+	  if(language == 0){
           BOOTH.show($('#question_div')).processTemplate({
             'question_num': question_num,
             'last_question_num': BOOTH.election.questions.length - 1,
@@ -299,6 +324,16 @@
             'show_reviewall': BOOTH.all_questions_seen,
   		      'answer_ordering': BOOTH.election.question_answer_orderings[question_num]
           });
+	}
+	else{
+	   BOOTH.show($('#questionNL_div')).processTemplate({
+            'question_num': question_num,
+            'last_question_num': BOOTH.election.questions.length - 1,
+            'question': BOOTH.election.questions[question_num],
+            'show_reviewall': BOOTH.all_questions_seen,
+  		      'answer_ordering': BOOTH.election.question_answer_orderings[question_num]
+	 });
+	}
 
           // fake clicking through the answers, to trigger the disabling if need be
           // first we remove the answers array
@@ -390,7 +425,7 @@
             $.getJSON(election_url + '/meta', {}, function(election_metadata) {
               BOOTH.election_metadata = election_metadata;
               BOOTH.setup_election(raw_json, election_metadata);
-              BOOTH.show_election();
+	      BOOTH.show_choose();
               BOOTH.election_url = election_url;
             });
           });
@@ -405,17 +440,32 @@
 
         BOOTH.hide_progress = function() {
           $('#progress_div').hide();
+	  $('#progressNL_div').hide();
         };
 
         BOOTH.show_progress = function(step_num) {
-          $('#progress_div').show();
-          $(['1','2','3','4','5']).each(function(n, step) {
+          if(language == 0){
+	    $('#progress_div').show();
+	    $('#progressNL_div').hide();
+	    $(['1','2','3','4','5']).each(function(n, step) {
             if (step == step_num) {
               $('#progress_' + step).attr('class', 'selected');
             } else {
               $('#progress_' + step).attr('class', 'unselected');
             }
-          });
+            });
+	  }
+	  else{
+	    $('#progressNL_div').show();
+	    $('#progress_div').hide();
+	    $(['1','2','3','4','5']).each(function(n, step) {
+            if (step == step_num) {
+              $('#progressNL_' + step).attr('class', 'selected');
+            } else {
+              $('#progressNL_' + step).attr('class', 'unselected');
+            }
+            });
+	  } 
         };
 
         BOOTH.so_lets_go = function() {
@@ -432,7 +482,7 @@
           // in the case of Chrome, we get here when Java
           // is disabled, instead of detecting the problem earlier.
           // because navigator.javaEnabled() still returns true.
-          // $('#election_div').hide();
+          // $('#choose_div').hide();
           // $('#error_div').show();
           USE_SJCL = true;
           sjcl.random.startCollectors();
@@ -461,13 +511,22 @@
         BOOTH.show_confirm = function() {
           // process the answers
           var choices = BALLOT.pretty_choices(BOOTH.election, BOOTH.ballot);
-
-          BOOTH.show($('#confirm_div')).processTemplate({
-            'questions': BOOTH.election.questions,
-            'choices': choices,
-            'election_metadata': BOOTH.election_metadata,
-            'encrypted_vote_hash': BOOTH.encrypted_ballot_hash,
-          });
+	  if(language == 0){  
+            BOOTH.show($('#confirm_div')).processTemplate({
+              'questions': BOOTH.election.questions,
+              'choices': choices,
+              'election_metadata': BOOTH.election_metadata,
+              'encrypted_vote_hash': BOOTH.encrypted_ballot_hash,
+            });
+	  }
+	  else{
+	    BOOTH.show($('#confirmNL_div')).processTemplate({
+              'questions': BOOTH.election.questions,
+              'choices': choices,
+              'election_metadata': BOOTH.election_metadata,
+              'encrypted_vote_hash': BOOTH.encrypted_ballot_hash,
+            });
+	  }
           BOOTH.show_progress('3');
         };
 
@@ -583,11 +642,18 @@
         BOOTH.audit_ballot = function() {
 	  BOOTH.show_progress('4');
           BOOTH.audit_trail = BOOTH.encrypted_ballot_with_plaintexts_serialized || $.toJSON(BOOTH.encrypted_ballot.get_audit_trail());
-          BOOTH.show($('#audit_div')).processTemplate({'audit_trail' : BOOTH.audit_trail, 'election_url' : BOOTH.election_url});
+          if(language ==0){
+	    BOOTH.show($('#audit_div')).processTemplate({'audit_trail' : BOOTH.audit_trail, 'election_url' : BOOTH.election_url});
+	  }
+	  else{
+	    BOOTH.show($('#auditNL_div')).processTemplate({'audit_trail' : BOOTH.audit_trail, 'election_url' : BOOTH.election_url});
+	  }
         };
 
         BOOTH.post_audited_ballot = function() {
           $.post(BOOTH.election_url + "/post-audited-ballot", {'audited_ballot': BOOTH.audit_trail}, function(result) {});
+	  // show confirmation that the ballot is posted.
+	  $('#confirmation_box').html('Your verified vote is correctly posted.');
         };
 
         BOOTH.cast_ballot = function() {
@@ -625,20 +691,21 @@
         };
       </script>
 
-      <div id="page">
-        <div id="progress_div" style="display:none; width: 600px; margin:auto;">
+      
+
+	<div id="progressNL_div" style="display:none; width: 600px; margin:auto;">
           <table width="100%">
-            <tr><td id="progress_1">1. Instructions</td><td id="progress_2">2. Select</td><td id="progress_3">3. Overview</td><td id="progress_4">(4. Audit)</td><td id="progress_5">5. Submit</td></tr>
+            <tr><td id="progressNL_1">1. Instructies</td><td id="progressNL_2">2. Selecteer</td><td id="progressNL_3">3. Overzicht</td><td id="progressNL_4">(4. verifieer)</td><td id="progressNL_5">5. Indienen</td></tr>
           </table>
         </div>
 
-        <div id="election_div" class="panel">
+        <div id="choose_div" class="panel">
           <div align="center">
-            <h3>Checking capabilities and loading election booth...</h3>
+            <h3>Laden verkiezing... / Loading election booth...</h3>
 
             <img src="loading.gif" />
             <br />
-            This may take up to 10 seconds.
+            Dit kan tot 10 seconden duren. / This may take up to 10 seconds.
           </div>
         </div>
 
@@ -655,8 +722,11 @@
         </div>
 
         <div id="question_div" class="panel"></div>
-
+	<div id="questionNL_div" class="panel"></div>
+	<div id="instr_div" class="panel"></div>
+	<div id="instrNL_div" class="panel"></div>
         <div id="confirm_div" class="panel"></div>
+	<div id="confirmNL_div" class="panel"></div>
 
         <div id="processing_div" class="panel" style="display:none;">
           <h3 align="center">Processing....</h3>
@@ -664,6 +734,8 @@
 
         <div id="encrypting_div" class="panel" style="display:none;">
           <h3 align="center">
+	    <img src="Media\key-icon.png" width="10%" />
+	    <br />
             Helios is now encrypting your vote...
             <br />
             <img src="encrypting.gif" /> <span style="font-size:0.7em; display:none;" id="percent_done_container">(<span id="percent_done">0</span>%)</span>
@@ -675,6 +747,7 @@
         <div id="seal_div" class="panel"></div>
 
         <div id="audit_div" class="panel"></div>
+	<div id="auditNL_div" class="panel"></div>
       </div>
 
       <br clear="both" />
