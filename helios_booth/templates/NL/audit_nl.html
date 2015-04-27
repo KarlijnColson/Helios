@@ -1,0 +1,56 @@
+<img src="Media/4_flowNL_verif.png" width="75%"/>
+<h3>Verifieer je stem: </h3>
+
+
+<p>
+<b>HOE?</b> 
+  <ol>
+  <li>Selecteer de onderstaande informatie over je stem door <a onclick="$('#audit_trail').select(); return false;" href="#">hier</a> te klikken. </li>
+
+  <li>Kopeer deze info (Rechter muisklik (op de info)+Copy OF CTRL+C)</li>
+ 
+  <li>Gebruik de <a target="_blank" href="single-ballot-verify_nl.html?election_url={$T.election_url}">Verificatie applicatie</a> om je stem en de encryptie ervan na te kijken.</li>
+  </ol>
+Wanneer je klaar bent met verifiëren klik je op 'terug naar de stemming' om terug te keren naar de overzichtspagina. Je stem wordt  opniew geëncrypteerd om je stem geheim te houden. Op de overzichtspagina kan je opniew kiezen om je stem te verifieren of om deze in te dienen.
+</p>
+
+<form action="#">
+  <textarea name="audit_trail" id="audit_trail" cols="80" rows="10" wrap="soft">
+    {$T.audit_trail}
+  </textarea>
+
+  <br />
+  <br />
+
+<div style="float: left; background: lightyellow; margin-left: 50px; margin-right: 50px; padding: 10px 10px; border: 1px solid #ddd; width:200px;">
+  <b><font size="5"> Stem posten </b></font> </a> <span style="font-size: 0.8em; color: #444">[Optioneel]</span>
+      <p>
+       voordat u terug gaat naar de stemming kan u deze geverifieerde stem posten op het Helios tracking center zodat anderen deze eventueel nog eens kunnen dubbel checken.
+      </p>
+      <p>
+	<b>Opgelet! Zelfs als je je geverifieerde stem post moet je teruggaan naar de stemming en 'stem indienen' kiezen om je stem te doen tellen.</b>
+      </p>
+
+      <input type="button" value="Post Stem" onclick="$(this).attr('disabled', 'disabled');BOOTH.post_audited_ballot();" id="post_audited_ballot_button" class="pretty" />
+
+<div id="confirmation_box" style="color: green; text-align:center; font-size: 1.4em; padding-top:10px; padding-bottom: 10px; height:50px;">
+  </div>
+
+</div>
+  <br />
+  <br />
+  <br />
+  <br />
+
+<p>
+  <b><u>BELANGRIJK</u></b>: Deze geverifieerde stem, <em>kan niet ingediend worden</em>.
+  <br />
+  Om je stem in te dienen, klik je op de "Terug naar de stemming" knop onderaan, re-encryptie gebeurt dan automatisch, en kies daarna "Stem indienen" in plaats van "Verifieer Encryptie".
+</p>
+<p>
+  <b>Waarom re-encryptie?</b> Door deze verificatie uit te voeren wordt zowel je stem, de encryptie en de randomness (het geheim) vrijgegeven. Dit betekent dat iedereen kan uitvinden op wie je gestemd hebt. Een nieuwe encryptie is dus noodzakelijk.  
+  <br />
+  <br />
+
+ <input type="button" value="Terug naar de stemming" onclick="BOOTH.reset_ciphertexts();BOOTH.seal_ballot();" class="pretty" />
+</form>

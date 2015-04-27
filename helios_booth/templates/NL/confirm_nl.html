@@ -1,0 +1,101 @@
+<img src="Media/3_flowNL_overzicht.png" width="75%"/>
+<h1>Overzicht van je keuzes</h1>
+
+<h3><u>Jouw verificatie-code en verifcatie-afbeelding:</u></h3>
+<br />
+<div style="width:100%; text-align:center">
+<b style="font-size: 18pt;">&nbsp;&nbsp;&nbsp;{$T.encrypted_vote_hash}</b> <br /><br />
+<b style="font-size: 26pt;"> OF </b> <br />
+<a href="https://robohash.org/{$T.encrypted_vote_hash}.png?size=200x200" download="verificatie-afbeelding.jpg" title="Verificatie-afbeelding">
+    <img src="https://robohash.org/{$T.encrypted_vote_hash}.png?size=200x200" alt="verificatie-afbeelding">
+</a>
+</div>
+<br />
+<p><font size="5">
+  Met behulp van deze verificatie-code OF de verificatie-afbeelding kan je na de stemming controleren of je stem correct geteld is. Zorg er daarom voor dat je deze code bewaard door deze ergens op de schrijven of sla de afbeelding hier op.
+ </font>
+  <br />
+  <br />
+</p>
+
+<h3><u>Jouw keuzes: </u></h3>
+
+{#if $T.election_type != 'ranked election'}
+  {#foreach $T.questions as question}
+    <p>
+      <b style="font-size:1.4em;">
+        #{$T.question$index + 1}: {$T.question.short_name}
+	[ <a onclick="BOOTH.show_question({$T.question$index}); return false;" href="#">Edit</a> ] <br />
+      </b>
+
+      <b style="font-size:1.4em;">
+        {#foreach $T.choices[$T.question$index] as choice}
+	 <ul>
+          <li>{$T.choice}</li>
+        {#/for}
+	</ul>
+      </b>
+      {#if $T.choices[$T.question$index].length == 0}
+	&nbsp;&nbsp;&nbsp;
+	<FONT COLOR="#8B0000"><b>Je hebt niet gestemd voor deze vraag, ben je er zeker van dat je blanco wil stemmen?</FONT></b>
+      {#elseif $T.choices[$T.question$index].length < $T.question.max}
+        &nbsp;&nbsp;&nbsp;
+        [je hebt 'onder-stemd': je mag tot {$T.question.max} stemmen uitbrengen.]
+      {#/if}
+
+      &nbsp;&nbsp;&nbsp;
+
+    </p>
+  {#/for}
+{#else}
+  {#foreach $T.questions as question}
+    {$T.index = 1;}
+    <p>
+	<b style="font-size:1.4em;">
+      #{$T.question$index + 1}</u>: {$T.question.short_name}
+	[<a onclick="BOOTH.show_question({$T.question$index}); return false;" href="#">Wijzig</a>] <br />
+      <b style="font-size:1.4em;">
+        {#foreach $T.choices[$T.question$index] as choice}
+ 	  <ul>
+          <li>{$T.index++}.{$T.choice}</li>
+        {#/for}
+	</ul>
+      </b>
+
+      &nbsp;&nbsp;&nbsp;
+    </p>
+  {#/for}
+{#/if}
+
+<div style="float: left; background: lightyellow; margin-left: 20px; padding: 10px 10px; border: 1px solid #ddd; width:500px; height: 350px; margin-bottom: 50px;">
+  <center><b><font size="6"> Indienen </b></font></center> </a>
+      <p>
+        Als je tevreden bent met je keuzes en deze wilt indienen, klik dan hier. Zorg ervoor dat je de juiste verificatie-code hebt opgeschreven en controleer op de volgende pagina of deze niet verandert is. 
+      </p>
+
+      <p>
+        Wanneer je je stem indient zal je gevraagd worden om in te loggen.
+      </p>
+	<br />
+	 <div align="center">
+      <input type="button" value="Stem indienen" onclick="BOOTH.cast_ballot();" class="pretty" />
+	</div>
+  </div>
+
+{#if $T.election_metadata.use_advanced_audit_features}
+  <div style="float: left; background: lightyellow; margin-left: 40px; padding: 10px 10px; border: 1px solid #ddd; width:300px; height: 350px; margin-bottom: 50px;">
+  <center><b><font size="6"> Verificatie </b></font></center> </a>
+      <p>
+        Indien gewenst kan je je stem en de encryptie ervan verifiëren. De encryptie en je stem wordt dan vrijgegeven en je kan narekenen of de encryptie wel correct gebeurd is. Op deze manier kan je het encryptie-systeem nakijken. 
+      </p>
+
+      <p>
+        Je kan dit proces zo vaak herhalen als je zelf wilt totdat je ervan overtuigd bent dat het systeem correct werkt.
+      </p>
+	 <div align="center">
+      <input type="button" value="Verifieer Encryptie" onclick="BOOTH.audit_ballot();" class="pretty" />
+	 </div>
+  </div>
+{#/if}
+
+ 
