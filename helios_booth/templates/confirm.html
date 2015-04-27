@@ -1,4 +1,4 @@
- <img src="Media/3_flow_overview.png" width="50%"/>
+ <img src="Media/3_flow_overview.png" width="75%"/>
 
 <h1>Review Your Vote</h1>
 
@@ -62,8 +62,8 @@
 
 <br /><br />
 {#if $T.election_metadata.use_advanced_audit_features}
-  <div style="float: left; background: lightyellow; margin-left: 50px; padding: 10px 10px; border: 1px solid #ddd; width:200px;">
-  <b><font size="6"> Verification </b></font> </a>
+  <div style="float: left; background: lightyellow; margin-left: 20px; padding: 10px 10px; border: 1px solid #ddd; width:400px; height: 275px; margin-bottom: 50px;">
+   <center><b><font size="6"> Verification </b></font></center> </a>
       <p>
         If you choose, you can verify your vote and reveal how your choices were encrypted.This way you can check for corruption or inconsistencies.
       </p>
@@ -71,21 +71,23 @@
       <p>
         You can repeat this process as many times as you want until you are convinced this vote system functions correctly.
       </p>
-
+	<div align="center">
       <input type="button" value="Verify Encryption" onclick="BOOTH.audit_ballot();" class="pretty" />
+	</div>
   </div>
 {#/if}
 
- <div style="float: left; background: lightyellow; margin-left: 50px; padding: 10px 10px; border: 1px solid #ddd; width:200px;">
-  <b><font size="6"> Submit </b></font> </a>
+ <div style="float: left; background: lightyellow; margin-left: 40px; padding: 10px 10px; border: 1px solid #ddd; width:400px; height: 275px; margin-bottom: 50px;">
+  <center><b><font size="6"> Submit </b></font></center> </a>
       <p>
-        If you're happy with your vote you can submit it here.
+        If you're happy with your vote you can submit it here. Make sure you noted down the correct verification code and compare it with the code on the next page.
       </p>
 
       <p>
         If you submit your vote you will be asked to login.
       </p>
-
-
+	<br />
+	<div align="center">
       <input type="button" value="Submit Vote" onclick="BOOTH.cast_ballot();" class="pretty" />
+	</div>
   </div>
