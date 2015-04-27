@@ -1,4 +1,5 @@
 {% extends TEMPLATE_BASE %}
+{% load i18n %}
 {% block title %}Submit Your Vote in {{election.name}}{% endblock %}
 
 {% load foundation %}
@@ -100,7 +101,7 @@
 
             {% with cast_ballot="1" %}
               <p>
-                Please provide the voter ID and password you received by email.
+                {% trans "Please provide the voter ID and password you received by email." %} 
               </p>
 
               {% if bad_voter_login %}
