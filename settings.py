@@ -57,7 +57,7 @@ TIME_ZONE = 'Europe/Brussels'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html.
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'nl'
 
 SITE_ID = 1
 
@@ -106,9 +106,9 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     # Secure a bunch of things
     'djangosecure.middleware.SecurityMiddleware',
-
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware'
 )
 

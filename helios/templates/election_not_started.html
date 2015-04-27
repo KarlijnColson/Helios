@@ -1,5 +1,7 @@
 {% extends TEMPLATE_BASE %}
-{% block title %}{{election.name}} Not Yet Started{% endblock %}
+{% load i18n %}
+
+{% block title %}{{election.name}}{% trans "Not Yet Started" %}{% endblock %}
 
 {% block content %}
   <div class="row">
