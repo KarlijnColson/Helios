@@ -112,6 +112,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware'
 )
 
+LANGUAGES = (
+    ('nl', 'Nederlands'),
+)
 ROOT_URLCONF = 'urls'
 
 ROOT_PATH = os.path.dirname(__file__)

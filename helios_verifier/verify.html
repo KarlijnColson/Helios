@@ -81,9 +81,9 @@
       });
     }
 
-    // load the ballot list in increments of 50, for long ballots
+    // load the ballot list in increments of 30, for long ballots
     function load_ballot_list(election_url, ballot_list, after, final_callback) {
-      var url = election_url + '/voters/?limit=50';
+      var url = election_url + '/voters/?limit=30';
       if (after)
         url += "&after=" + after;
 
