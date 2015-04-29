@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-27 15:02+0200\n"
+"POT-Creation-Date: 2015-04-29 10:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,12 +18,18 @@ msgstr ""
 
 #: helios/templates/election_cast_confirm.html:104
 msgid "Please provide the voter ID and password you received by email."
-msgstr "Geef hieronder alsjeblieft je Voter ID en paswoord in die je via mail ontvangen hebt."
+msgstr ""
+"Geef hieronder alsjeblieft je Voter ID en paswoord in die je via mail "
+"ontvangen hebt."
 
 #: helios/templates/election_not_started.html:4
 #: helios/templates/election_not_started.html:10
 msgid "Not Yet Started"
 msgstr "Verkiezing is nog niet begonnen"
+
+#: helios/templates/election_tallied.html:9
+msgid "This election has already been tallied, you can no longer cast a vote."
+msgstr "Deze verkiezing is al afgelopen, je kan geen stem meer uitbrengen."
 
 #: venv/lib/python2.7/site-packages/django/conf/global_settings.py:52
 msgid "Arabic"
