@@ -5,8 +5,6 @@ Ben Adida (ben@adida.net)
 """
 
 from django.conf.urls.defaults import *
-from django.conf.urls import include, url
-from django.conf.urls.i18n import i18n_patterns
 
 from helios.views import *
 
@@ -45,6 +43,12 @@ urlpatterns = patterns('',
   (r'^/trustees/(?P<trustee_uuid>[^/]+)/upload-decryption$', trustee_upload_decryption),
   (r'^/trustees/(?P<trustee_uuid>[^/]+)/upload-encrypted-shares$', trustee_upload_encrypted_shares),
 
+  # election voting-process actions  -- THESE NEED TO BE TRANSLATED 
+  (r'^/view$', one_election_view),
+  (r'^/result$', one_election_result),
+  (r'^/result_proof$', one_election_result_proof),
+  (r'^/audited-ballots/$', one_election_audited_ballots),
+
   # server-side encryption
   (r'^/encrypt-ballot$', encrypt_ballot),
 
@@ -60,6 +64,12 @@ urlpatterns = patterns('',
   # computing tally
   (r'^/compute_tally$', one_election_compute_tally),
   (r'^/combine_decryptions$', combine_decryptions),
+
+  # casting a ballot before we know who the voter is -- TRANSLATION?
+  (r'^/cast$', one_election_cast),
+  (r'^/cast_confirm$', one_election_cast_confirm),
+  (r'^/password_voter_login$', password_voter_login),
+  (r'^/cast_done$', one_election_cast_done),
 
   # post audited ballot	- TRANSLATION? (STATIC)
   (r'^/post-audited-ballot', post_audited_ballot),
@@ -78,16 +88,4 @@ urlpatterns = patterns('',
   (r'^/ballots/$', ballot_list),
   (r'^/ballots/(?P<voter_uuid>[^/]+)/all$', voter_votes),
   (r'^/ballots/(?P<voter_uuid>[^/]+)/last$', voter_last_vote),
-
-# election voting-process actions  -- THESE NEED TO BE TRANSLATED 
-   url(r'^/view$', one_election_view, name='one_election_view'),
-   url(r'^/result$', one_election_result, name='one_election_result'),
-   url(r'^/result_proof$', one_election_result_proof, name='one_election_result_proof'),
-   url(r'^/audited-ballots/$', one_election_audited_ballots, name='one_election_auditted_ballots'),
-
-  # casting a ballot before we know who the voter is -- TRANSLATION?
-   url(r'^/cast$', one_election_cast, name='one_election_cast'),
-   url(r'^/cast_confirm$', one_election_cast_confirm, name='one_election_cast_confirm'),
-   url(r'^/password_voter_login$', password_voter_login, name='password_voter_login'),
-   url(r'^/cast_done$', one_election_cast_done, name='one_election_cast_done'),
 )

@@ -57,7 +57,7 @@ TIME_ZONE = 'Europe/Brussels'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html.
-LANGUAGE_CODE = 'nl'
+LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
@@ -112,9 +112,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware'
 )
 
+from django.utils.translation import ugettext_lazy as _
 LANGUAGES = (
-    ('nl', 'Nederlands'),
+    ('en', _('English')),
+    ('nl', _('Dutch')),
 )
+
 ROOT_URLCONF = 'urls'
 
 ROOT_PATH = os.path.dirname(__file__)
