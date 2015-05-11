@@ -120,12 +120,15 @@
         </div>
       {% endif %}
 
+      {% if election.num_voters > 20 %}
+	<div>
 	<p><font size="3">
  	{% trans "use this search-function to easily find your vote. Search by " %}{% if election.use_voter_aliases %}Alias{% else %}{% trans "voter-name." %}{% endif %}
 	 </font>
 	</p>
+	</div>
 
-      {% if election.num_voters > 20 %}
+
         <form method="get" action="{% url helios.views.voters_list_pretty election.uuid %}">
           <div class="row">
             <div class="large-12 columns">
@@ -145,10 +148,13 @@
         </form>
       {% endif %}
 
+      {% ifnotequal admin_p 1 %}
+	<div>
 	<p><font size="3">
 	 {% trans "Once you've found your verification-code you can generate the verification-picture here." %}
  	</font>
 	</p>
+	</div>
 
  	<form method="get" action="{% url helios.views.voters_list_pretty election.uuid %}">
           <div class="row">
@@ -167,11 +173,14 @@
             </div>
           </div>
         </form>
+       {% endifnotequal %}
 
 	 {% if robohash %}
+	<div>
 	<a href="https://robohash.org/{{generate}}.png?size=200x200" download="verification-picture.jpg" title={{generate}}>
     <img src="https://robohash.org/{{generate}}.png?size=200x200" alt="verification-picture">
 </a>
+	</div>
 	{% endif %}
 
       <table>

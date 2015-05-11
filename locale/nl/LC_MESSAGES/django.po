@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-11 11:24+0200\n"
+"POT-Creation-Date: 2015-05-11 12:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,7 +111,7 @@ msgid "single ballot verifier"
 msgstr "verificator"
 
 #: helios/templates/election_audited_ballots.html:35
-#: helios/templates/voters_list.html:212
+#: helios/templates/voters_list.html:221
 msgid "View"
 msgstr "Overzicht"
 
@@ -573,26 +573,26 @@ msgstr "ingedient."
 msgid "No votes were cast yet."
 msgstr "Er zijn nog geen stemmen uitgebracht."
 
-#: helios/templates/voters_list.html:124
+#: helios/templates/voters_list.html:126
 msgid "use this search-function to easily find your vote. Search by "
 msgstr ""
 "Gebruik deze zoek-functie om jouw stem eenvoudig terug te vinden. Zoek op "
 
-#: helios/templates/voters_list.html:124
+#: helios/templates/voters_list.html:126
 msgid "voter-name."
 msgstr "naam van de stemmer."
 
-#: helios/templates/voters_list.html:134 helios/templates/voters_list.html:137
+#: helios/templates/voters_list.html:137 helios/templates/voters_list.html:140
 #: venv/lib/python2.7/site-packages/django/contrib/admin/templates/admin/search_form.html:7
 msgid "Search"
 msgstr "Zoek"
 
-#: helios/templates/voters_list.html:140 helios/templates/voters_list.html:164
+#: helios/templates/voters_list.html:143 helios/templates/voters_list.html:170
 #: venv/lib/python2.7/site-packages/django/forms/widgets.py:327
 msgid "Clear"
 msgstr "Wissen"
 
-#: helios/templates/voters_list.html:149
+#: helios/templates/voters_list.html:154
 msgid ""
 "Once you've found your verification-code you can generate the verification-"
 "picture here."
@@ -600,24 +600,24 @@ msgstr ""
 "Wanneer je je verificatie-code hebt gevonden kan je hier de verificatie-"
 "afbeelding genereren."
 
-#: helios/templates/voters_list.html:158
+#: helios/templates/voters_list.html:164
 msgid "Verification-code"
 msgstr "Verificatie-code"
 
-#: helios/templates/voters_list.html:161
+#: helios/templates/voters_list.html:167
 msgid "Generate"
 msgstr "Genereer"
 
-#: helios/templates/voters_list.html:181
+#: helios/templates/voters_list.html:190
 #: venv/lib/python2.7/site-packages/django/contrib/comments/forms.py:96
 msgid "Name"
 msgstr "Naam"
 
-#: helios/templates/voters_list.html:185
+#: helios/templates/voters_list.html:194
 msgid "Alias"
 msgstr "Alias"
 
-#: helios/templates/voters_list.html:188
+#: helios/templates/voters_list.html:197
 msgid "Smart Ballot Tracker"
 msgstr "verificatie-code"
 
