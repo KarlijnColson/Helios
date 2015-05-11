@@ -1536,7 +1536,7 @@ def voters_list_pretty(request, election):
 
     categories = None
     eligibility_category_id = None
-    robohash = 0
+    robohash = None
 
     try:
         if admin_p and can_list_categories(user.user_type):
@@ -1561,7 +1561,7 @@ def voters_list_pretty(request, election):
             voters = voters.filter(voter_name__icontains=q)
 
     if p != '':
-	robohash = 1
+	robohash = True
 
     voters_paginator = Paginator(voters, limit)
     voters_page = voters_paginator.page(page)
