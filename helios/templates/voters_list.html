@@ -175,12 +175,12 @@
         </form>
        {% endifnotequal %}
 	
-	{% ifnotequal p "" %}
+	{% ifnot p %}
 	<p><font size="3">
 		Ik doe dus wel een update en de robohash heeft volgende waarde {{robohash}}
  	</font>
 	</p>
-	{% endifnotequal %}
+	{% endifnot %}
 
 	 {% if robohash %}
 	<div>
