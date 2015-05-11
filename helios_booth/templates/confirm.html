@@ -2,12 +2,18 @@
 
 <h1>Review Your Vote</h1>
 
-<h3><u>Your verification-code:</u></h3>
+<h3><u>Your verification-code en verification-picture:</u></h3>
 <br />
-<b><tt style="font-size: 18pt;">&nbsp;&nbsp;&nbsp;{$T.encrypted_vote_hash}</tt></b>
+<div style="width:100%; text-align:center">
+<b style="font-size: 18pt;">&nbsp;&nbsp;&nbsp;{$T.encrypted_vote_hash}</b> <br /><br />
+<b style="font-size: 26pt;"> OR </b> <br />
+<a href="https://robohash.org/{$T.encrypted_vote_hash}.png?size=200x200" download="verification-picture.jpg" title="Verification-picture">
+    <img src="https://robohash.org/{$T.encrypted_vote_hash}.png?size=200x200" alt="verification-picture">
+</a>
+</div>
 <br />
 <p><font size="5">
-  with the help of this verification code, you can verify whether your vote is correctly counted. For this please copy this verification-code or use [<a onclick="BOOTH.show_receipt(); return false;" href="#">Print</a>].
+  with the help of this verification code or verification-picture, you can verify whether your vote is correctly counted. For this please copy this verification-code (use [<a onclick="BOOTH.show_receipt(); return false;" href="#">Print</a>]) or save the image.
  </font>
   <br />
   <br />
@@ -60,9 +66,23 @@
   {#/for}
 {#/if}
 
-<br /><br />
+<div style="float: left; background: lightyellow; margin-left: 20px; padding: 10px 10px; border: 1px solid #ddd; width:500px; height: 350px; margin-bottom: 50px;">
+  <center><b><font size="6"> Submit </b></font></center> </a>
+      <p>
+        If you're happy with your vote you can submit it here. Make sure you noted down the correct verification code and compare it with the code on the next page.
+      </p>
+
+      <p>
+        If you submit your vote you will be asked to login.
+      </p>
+	<br />
+	<div align="center">
+      <input type="button" value="Submit Vote" onclick="BOOTH.cast_ballot();" class="pretty" />
+	</div>
+  </div>
+
 {#if $T.election_metadata.use_advanced_audit_features}
-  <div style="float: left; background: lightyellow; margin-left: 20px; padding: 10px 10px; border: 1px solid #ddd; width:400px; height: 275px; margin-bottom: 50px;">
+  <div style="float: left; background: lightyellow; margin-left: 40px; padding: 10px 10px; border: 1px solid #ddd; width:300px; height: 350px; margin-bottom: 50px;">
    <center><b><font size="6"> Verification </b></font></center> </a>
       <p>
         If you choose, you can verify your vote and reveal how your choices were encrypted.This way you can check for corruption or inconsistencies.
@@ -77,17 +97,4 @@
   </div>
 {#/if}
 
- <div style="float: left; background: lightyellow; margin-left: 40px; padding: 10px 10px; border: 1px solid #ddd; width:400px; height: 275px; margin-bottom: 50px;">
-  <center><b><font size="6"> Submit </b></font></center> </a>
-      <p>
-        If you're happy with your vote you can submit it here. Make sure you noted down the correct verification code and compare it with the code on the next page.
-      </p>
-
-      <p>
-        If you submit your vote you will be asked to login.
-      </p>
-	<br />
-	<div align="center">
-      <input type="button" value="Submit Vote" onclick="BOOTH.cast_ballot();" class="pretty" />
-	</div>
-  </div>
+ 

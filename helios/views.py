@@ -5,8 +5,6 @@ Helios Django Views
 Ben Adida (ben@adida.net)
 """
 
-from django.core.urlresolvers import reverse
-from django.utils.translation import activate
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.http import *
@@ -154,7 +152,6 @@ def election_single_ballot_verifier(request):
 def election_shortcut(request, election_short_name):
     election = Election.get_by_short_name(election_short_name)
     if election:
-	activate('en')
         return HttpResponseRedirect(settings.SECURE_URL_HOST + reverse(one_election_view, args=[election.uuid]))
     else:
         raise Http404
@@ -165,7 +162,6 @@ def _election_vote_shortcut(request, election):
     """
     a hidden view behind the shortcut that performs the actual perm check
     """
-    activate('en')
     vote_url = "%s/booth/vote.html?%s" % (settings.SECURE_URL_HOST, urllib.urlencode({'election_url': reverse(one_election, args=[election.uuid])}))
 
     test_cookie_url = "%s?%s" % (settings.SECURE_URL_HOST + reverse(test_cookie), urllib.urlencode({'continue_url': vote_url}))
@@ -1527,6 +1523,7 @@ def voters_list_pretty(request, election):
     page = int(request.GET.get('page', 1))
     limit = int(request.GET.get('limit', 50))
     q = request.GET.get('q', '')
+    p = request.GET.get('p', '')
 
     order_by = 'user__user_id'
 
@@ -1539,6 +1536,7 @@ def voters_list_pretty(request, election):
 
     categories = None
     eligibility_category_id = None
+    robohash = 0
 
     try:
         if admin_p and can_list_categories(user.user_type):
@@ -1562,6 +1560,9 @@ def voters_list_pretty(request, election):
         else:
             voters = voters.filter(voter_name__icontains=q)
 
+    if p != '':
+	robohash = 1
+
     voters_paginator = Paginator(voters, limit)
     voters_page = voters_paginator.page(page)
 
@@ -1570,6 +1571,8 @@ def voters_list_pretty(request, election):
         'voters_paginator': voters_paginator,
         'voters_page': voters_page,
         'voters': voters_page.object_list,
+	'robohash': robohash,
+	'generate': p,
         'admin_p': admin_p,
         'email_voters': helios.VOTERS_EMAIL,
         'limit': limit,

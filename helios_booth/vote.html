@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-{% load i18n %}
+
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
+
   <title>Helios</title>
 
   <link rel="stylesheet" type="text/css" href="css/booth.css?ts=<?=time()?>" />
@@ -692,12 +693,12 @@
           <h3 align="center">
 	    <img src="Media\key-icon.png" width="10%" />
 	    <br />
-            {% trans 'Helios is now encrypting your vote...' %}
+            Helios is now encrypting your vote...
             <br />
             <img src="encrypting.gif" /> <span style="font-size:0.7em; display:none;" id="percent_done_container">(<span id="percent_done">0</span>%)</span>
           </h3>
 
-          <p align="center"><b>{% trans 'This may take up to two minutes.' %}</b>
+          <p align="center"><b> This may take up to two minutes.</b>
         </div>
 
         <div id="seal_div" class="panel"></div>

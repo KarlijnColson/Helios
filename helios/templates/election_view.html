@@ -1,4 +1,6 @@
 {% extends TEMPLATE_BASE %}
+{% load i18n %}
+
 {% block title %}{{election.name}}{% endblock %}
 
 {% block content %}
@@ -19,7 +21,7 @@
         {% if settings.SHOW_USER_INFO %}
           <div class="large-4 columns">
             <dl>
-              <dt>Created by</dt>
+              <dt>{% trans "Created by"  %}</dt>
               <dd>{{election.admin.display_html_small|safe}}</dd>
             </dl>
           </div>
@@ -28,7 +30,7 @@
         {% if election.voting_starts_at %}
           <div class="large-4 columns">
             <dl>
-              <dt>Voting {% if election.voting_has_stopped %}Started{% else %}Starts{% endif %} at</dt>
+              <dt>{% trans "Voting "  %}{% if election.voting_has_stopped %}{% trans "Started"  %}{% else %}{% trans "Starts"  %}{% endif %}{% trans " at"  %}</dt>
               <dd>{{election.voting_starts_at}}</dd>
             </dl>
           </div>
@@ -37,7 +39,7 @@
         {% if election.voting_ends_at %}
           <div class="large-4 columns">
             <dl>
-              <dt>Voting {% if election.voting_has_stopped %}Ended{% else %}Ends{% endif %} at</dt>
+              <dt>{% trans "Voting "  %}{% if election.voting_has_stopped %}{% trans "Ended"  %}{% else %}{% trans "Ends"  %}{% endif %}{% trans " at"  %}</dt>
               <dd>{{election.voting_ends_at}}</dd>
             </dl>
           </div>
@@ -54,7 +56,7 @@
               {% endif %}
 
               {% if election.description %}
-                <dt>Description</dt>
+                <dt>{% trans "Description" %}</dt>
                 <dd>{{election.description_bleached|safe}}</dd>
               {% endif %}
             </dl>
@@ -68,19 +70,19 @@
     <div class="large-12 columns">
       {% if election.result %}
         <div data-alert class="alert-box info">
-          This election is complete.
+          {% trans "This election is complete." %}
         </div>
 
         {% if election.private_p %}
-          <h3>Participation</h3>
+          <h3>{% trans "Participation" %}</h3>
 
           <p>
-            {{num_voters_cast}} out of {{num_voters}} voters cast their vote, or {{participation_percentage}}%.
+            {{num_voters_cast}}{% trans " out of " %} {{num_voters}}{% trans " voters cast their vote, or  " %}{{participation_percentage}}%.
           </p>
         {% endif %}
 
         {% if admin_p or election.publish_tally %}
-          <h3>Tally</h3>
+          <h3>{% trans "Tally" %}</h3>
 
           {% for question in election.pretty_result %}
             {% if forloop.counter0|divisibleby:2 %}<div class="row">{% endif %}
@@ -91,10 +93,10 @@
                   <thead>
                     <tr>
                       <td>
-                        Answer
+                        {% trans "Answer" %}
                       </td>
                       <td>
-                        Count
+                        {% trans "Count" %}
                       </td>
                     </tr>
                   </thead>
@@ -124,33 +126,33 @@
       {% else %}
         {% if election.voting_has_stopped %}
           <div data-alert class="alert-box info">
-            This election is closed. The tally will be computed soon.
+            {% trans "This election is closed. The tally will be computed soon." %}
           </div>
         {% else %}
           {% if election.voting_has_started %}
-            <a class="button" href="{{test_cookie_url}}">Vote in This {{election.election_type|title}}</a>
+            <a class="button" href="{{test_cookie_url}}">{% trans "Vote in this " %}{{election.election_type|title}}</a>
 
             <div data-alert class="alert-box warning">
               {% if election.voting_extended_until %}
-                This {{election.election_type}} was initially scheduled to end at {{election.voting_ends_at}}, but has been extended until {{ election.voting_extended_until }}.
+                {% trans "This " %}{{election.election_type}}{% trans " was initially scheduled to end at " %} {{election.voting_ends_at}}, {% trans " but has been extended until " %} {{ election.voting_extended_until }}.
               {% else %}
                 {% if election.voting_ends_at %}
-                  This {{election.election_type}} is scheduled to end at {{election.voting_ends_at}}.
+                  {% trans "This " %}{{election.election_type}}{% trans " is scheduled to end at " %}{{election.voting_ends_at}}.
                 {% else %}
-                  This {{election.election_type}} ends at the administrator's discretion.
+                  {% trans "This " %}{{election.election_type}}{% trans " ends at the administrator's discretion." %}
                 {% endif %}
               {% endif %}
             </div>
 
             {% if election.private_p and voter %}
-              <p>This election is <b>private</b>. You are signed in as an eligible voter <i>{{voter.name}}</i>.</p>
+              <p>{% trans "This election is <b>private</b>. You are signed in as an eligible voter " %}<i>{{voter.name}}</i>.</p>
             {% endif %}
           {% else %}
             <div data-alert class="alert-box warning">
               {% if election.voting_starts_at %}
-                This {{election.election_type}} is scheduled to start at {{election.voting_starts_at}}.
+                {% trans "This " %}{{election.election_type}}{% trans " is scheduled to start at " %}{{election.voting_starts_at}}.
               {% else %}
-                Voting is not yet open.
+                {% trans "Voting is not yet open." %}
               {% endif %}
             </div>
           {% endif %}
@@ -158,19 +160,19 @@
           {% if user %}
             {% if voter %}
               <p>
-                You are registered to vote in this {{election.election_type}}. {% if election.use_voter_aliases %}Your voter alias is {{voter.alias}}.{% endif %}
+                {% trans "You are registered to vote in this " %}{{election.election_type}}. {% if election.use_voter_aliases %}{% trans "Your voter alias is " %}{{voter.alias}}.{% endif %}
               </p>
             {% else %}
               {% if not election.result %}
                 <div data-alert class="alert-box info">
                   {% if election.openreg %}
                     {% if eligible_p %}
-                      You are eligible to vote in this election.
+                      {% trans "You are eligible to vote in this election." %}
                     {% else %}
-                      You are <i>not eligible</i> to vote in this {{election.election_type}}.
+                      {% trans "You are <i>not eligible</i> to vote in this " %}{{election.election_type}}.
                     {% endif %}
                   {% else %}
-                    You are <i>not eligible</i> to vote in this {{election.election_type}}.
+                    {% trans "You are <i>not eligible</i> to vote in this " %}{{election.election_type}}.
                   {% endif %}
                 </div>
               {% endif %}
@@ -178,12 +180,12 @@
           {% else %}
             {% if election.openreg %}
               <div data-alert class="alert-box info">
-                <b>Who can vote?</b>
+                <b>{% trans "Who can vote?" %}</b>
 
                 {% if election.eligibility %}
                   {{election.pretty_eligibility|safe}}
                 {% else %}
-                  Anyone can vote in this election.
+                  {% trans "Anyone can vote in this election." %}
                 {% endif %}
               </div>
             {% endif %}
@@ -191,36 +193,36 @@
         {% endif %}
       {% endif %}
 
-      <h3>Audit</h3>
+      <h3>{% trans "Audit" %}</h3>
 
       {% if election.frozen_at %}
-        <a class="button" href="{% url helios.views.voters_list_pretty election.uuid %}">Ballot Tracking Center</a>
-        <a class="button" href="{% url helios.views.one_election_audited_ballots election.uuid %}">Audited Ballots</a>
+        <a class="button" href="{% url helios.views.voters_list_pretty election.uuid %}">{% trans "Ballot Tracking Center" %}</a>
+        <a class="button" href="{% url helios.views.one_election_audited_ballots election.uuid %}">{% trans "Audited Ballots" %}</a>
 
         {% if not election.voting_has_started %}
-          <a class="button" href="{{SECURE_URL_HOST}}/booth/vote.html?election_url={% url helios.views.one_election election.uuid %}">Preview Booth</a>
+          <a class="button" href="{{SECURE_URL_HOST}}/booth/vote.html?election_url={% url helios.views.one_election election.uuid %}">{% trans "Preview Booth" %}</a>
         {% endif %}
       {% endif %}
 
       {% if election.voting_has_stopped %}
         {% if election.result %}
-          <a class="button" target="_blank" href="/verifier/verify.html?election_url={% url helios.views.one_election election.uuid %}">Verify Election Tally</a>
+          <a class="button" target="_blank" href="/verifier/verify.html?election_url={% url helios.views.one_election election.uuid %}">{% trans "Verify Election Tally" %}</a>
         {% endif %}
 
-        <a class="button" href="{{vote_url}}">Review the Voting Booth</a>
+        <a class="button" href="{{vote_url}}">{% trans "Review the Voting Booth" %}</a>
       {% endif %}
 
       <div class="panel callout">
         <dl class="no-margin">
-          <dt>Election URL</dt>
+          <dt>{% trans "Election URL" %}</dt>
           <dd><a href="{{election.url}}">{{election.url}}</a></dd>
 
           {% if election.frozen_at %}
-            <dt>Election Fingerprint</dt>
+            <dt>{% trans "Election Fingerprint" %}</dt>
             <dd><tt style="font-weight: bold;">{{election.hash}}</tt></dd>
 
             {% if votes %}
-              <dt>Your Smart Ballot Tracker</dt>
+              <dt>{% trans "Your Smart Ballot Tracker" %}</dt>
               <dd><tt style="font-weight: bold;">{{votes.0.vote_hash}}</tt></dd>
             {% endif %}
           {% endif %}

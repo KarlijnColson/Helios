@@ -1,11 +1,13 @@
 {% extends TEMPLATE_BASE %}
-{% block title %}Recent Votes{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Recent Votes" %}{% endblock %}
 
 {% block content %}
   <div class="row">
     <div class="large-12 columns">
       <h2>
-        Recent Votes <small>[<a href="/">Back</a>]</small>
+        {% trans "Recent Votes " %}<small>[<a href="/">{% trans "Back" %}</a>]</small>
       </h2>
 
       <ul>

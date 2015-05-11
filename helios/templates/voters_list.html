@@ -1,5 +1,7 @@
 {% extends TEMPLATE_BASE %}
-{% block title %}Voters and Ballot Tracking Center for {{election.name}}{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Voters and Ballot Tracking Center for " %}{{election.name}}{% endblock %}
 
 {% block content %}
   {% if admin_p %}
@@ -9,16 +11,16 @@
   <div class="row">
     <div class="large-12 columns">
       <h2>
-        {{election.name}}&mdash;Voters and Ballot Tracking Center {% if admin_p %}<small>[<a href="{% url helios.views.one_election_admin election.uuid %}">Back</a>]</small>{% else %}<small>[<a href="{% url helios.views.one_election_view election.uuid %}">Back</a>]</small>{% endif %}
+        {{election.name}}&mdash;{% trans "Voters and Ballot Tracking Center " %}{% if admin_p %}<small>[<a href="{% url helios.views.one_election_admin election.uuid %}">Back</a>]</small>{% else %}<small>[<a href="{% url helios.views.one_election_view election.uuid %}">{% trans "Back" %}</a>]</small>{% endif %}
       </h2>
 
       <div data-alert class="alert-box info">
-        <b>Who can vote?</b>
+        <b>{% trans "Who can vote?" %}</b>
 
         {% if election.openreg %}
           {{election.pretty_eligibility|safe}}
         {% else %}
-          Only voters listed explicitly below can vote.
+          {% trans "Only voters listed explicitly below can vote." %}
         {% endif %}
       </div>
 
@@ -105,18 +107,23 @@
       {% endif %}
 
       <h3>
-        Ballot Tracking Center {% if voters and email_voters and election.frozen_at and admin_p %}<small>[<a href="{% url helios.views.voters_email election.uuid %}">E-mail All</a>]</small>{% endif %}
+        {% trans "Ballot Tracking Center " %}{% if voters and email_voters and election.frozen_at and admin_p %}<small>[<a href="{% url helios.views.voters_email election.uuid %}">E-mail All</a>]</small>{% endif %}
       </h3>
 
       {% if voters %}
         <div data-alert class="alert-box info">
           {% if election.num_cast_votes %}
-            {{election.num_cast_votes}} vote{% ifnotequal election.num_cast_votes 1 %}s{% endifnotequal %} {% ifequal election.num_cast_votes 1 %}was{% else %} were{% endifequal %} cast.
+            {{election.num_cast_votes}}{% trans " vote" %}{% ifnotequal election.num_cast_votes 1 %}{% trans "s" %}{% endifnotequal %} {% ifequal election.num_cast_votes 1 %}{% trans "was" %}{% else %}{% trans " were" %}{% endifequal %}{% trans " cast." %}
           {% else %}
-            No votes were cast yet.
+            {% trans "No votes were cast yet." %}
           {% endif %}
         </div>
       {% endif %}
+
+	<p><font size="3">
+ 	{% trans "use this search-function to easily find your vote. Search by " %}{% if election.use_voter_aliases %}Alias{% else %}{% trans "voter-name." %}{% endif %}
+	 </font>
+	</p>
 
       {% if election.num_voters > 20 %}
         <form method="get" action="{% url helios.views.voters_list_pretty election.uuid %}">
@@ -124,13 +131,13 @@
             <div class="large-12 columns">
               <div class="row collapse">
                 <div class="small-10 columns">
-                  <input type="text" name="q" {% if q %}value={{q}}{% endif %} placeholder="Search" />
+                  <input type="text" name="q" {% if q %}value={{q}}{% endif %} placeholder="{% trans "Search" %}" />
                 </div>
                 <div class="small-1 columns">
-                  <input type="submit" class="button postfix" value="Search" />
+                  <input type="submit" class="button postfix" value="{% trans "Search" %}" />
                 </div>
                 <div class="small-1 columns">
-                  <a class="button secondary postfix" href="?">Clear</a>
+                  <a class="button secondary postfix" href="?">{% trans "Clear" %}</a>
                 </div>
               </div>
             </div>
@@ -138,18 +145,47 @@
         </form>
       {% endif %}
 
+	<p><font size="3">
+	 {% trans "Once you've found your verification-code you can generate the verification-picture here." %}
+ 	</font>
+	</p>
+
+ 	<form method="get" action="{% url helios.views.voters_list_pretty election.uuid %}">
+          <div class="row">
+            <div class="large-12 columns">
+              <div class="row collapse">
+                <div class="small-10 columns">
+                  <input type="text" name="p" {% if p %}value={{p}}{% endif %} placeholder="{% trans "Verification-code" %}" />
+                </div>
+                <div class="small-1 columns">
+                  <input type="submit" class="button postfix" value="{% trans "Generate" %}"/>
+                </div>
+                <div class="small-1 columns">
+                  <a class="button secondary postfix" href="?">{% trans "Clear" %}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+	 {% if robohash %}
+	<a href="https://robohash.org/{{generate}}.png?size=200x200" download="verification-picture.jpg" title={{generate}}>
+    <img src="https://robohash.org/{{generate}}.png?size=200x200" alt="verification-picture">
+</a>
+	{% endif %}
+
       <table>
         <thead>
           <tr>
             {% if admin_p or not election.use_voter_aliases %}
-              <th>Name</th>
+              <th>{% trans "Name" %}</th>
             {% endif %}
 
             {% if election.use_voter_aliases %}
-              <th width="20%">Alias</th>
+              <th width="20%">{% trans "Alias" %}</th>
             {% endif %}
 
-            <th width="40%">Smart Ballot Tracker</th>
+            <th width="40%">{% trans "Smart Ballot Tracker" %}</th>
           </tr>
         </thead>
 
@@ -173,7 +209,7 @@
 
               <td>
                 {% if voter.vote_hash %}
-                  [<a href="{% url helios.views.castvote_shortcut vote_tinyhash=voter.vote_tinyhash %}">View</a>] <tt>{{voter.vote_hash}}</tt>
+                  [<a href="{% url helios.views.castvote_shortcut vote_tinyhash=voter.vote_tinyhash %}">{% trans "View" %}</a>] <tt>{{voter.vote_hash}}</tt>
                 {% endif %}
               </td>
             </tr>
@@ -181,7 +217,7 @@
             <tr>
               <td class="text-center" colspan="{% if admin_p and election.use_voter_aliases %}3{% else %}2{% endif %}">
                 {% if election.open_reg %}
-                  <i>No voters were uploaded yet.</i>
+                  <i>"No voters were uploaded yet.</i>
                 {% else %}
                   <i>No votes were cast yet.</i>
                 {% endif %}

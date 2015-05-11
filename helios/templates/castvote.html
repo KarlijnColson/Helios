@@ -1,31 +1,33 @@
 {% extends TEMPLATE_BASE %}
-{% block title %}Vote {{cast_vote.vote_tinyhash}} for {{election.name}}{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Vote " %}{{cast_vote.vote_tinyhash}}{% trans " for " %}{{election.name}}{% endblock %}
 
 {% block content %}
   <div class="row">
     <div class="large-12 column">
       <h2>
-        {{election.name}}&mdash;Cast Vote {{cast_vote.vote_tinyhash}} <small>[<a href="{% url helios.views.voters_list_pretty election.uuid %}">Back</a>]</small>
+        {{election.name}}&mdash;{% trans "Cast Vote " %}{{cast_vote.vote_tinyhash}} <small>[<a href="{% url helios.views.voters_list_pretty election.uuid %}">{% trans "Back" %}</a>]</small>
       </h2>
 
       <div class="row">
         <div class="large-3 columns">
           <dl>
-            <dt>Cast In</dt>
+            <dt>{% trans "Cast In" %}</dt>
             <dd><a href="{% url helios.views.one_election_view election.uuid %}">{{election.name}}</a></dd>
           </dl>
         </div>
 
         <div class="large-6 columns">
           <dl>
-            <dt>Fingerprint</dt>
+            <dt>{% trans "Fingerprint" %}</dt>
             <dd><tt>{{cast_vote.vote_hash}}</tt></dd>
           </dl>
         </div>
 
         <div class="large-3 columns">
           <dl>
-            <dt>Cast by</dt>
+            <dt>{% trans "Cast by" %}</dt>
             <dd>
               {% if the_voter.alias %}
                 {{the_voter.alias}}
