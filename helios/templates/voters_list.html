@@ -148,40 +148,7 @@
         </form>
       {% endif %}
 
-      {% ifnotequal admin_p 1 %}
-	<div>
-	<p><font size="3">
-	 {% trans "Once you've found your verification-code you can generate the verification-picture here." %}
- 	</font>
-	</p>
-	</div>
-
- 	<form method="get" action="{% url helios.views.voters_list_pretty election.uuid %}">
-          <div class="row">
-            <div class="large-12 columns">
-              <div class="row collapse">
-                <div class="small-10 columns">
-                  <input type="text" name="p" {% if p %}value={{p}}{% endif %} placeholder="{% trans "Verification-code" %}" />
-                </div>
-                <div class="small-1 columns">
-                  <input type="submit" class="button postfix" value="{% trans "Generate" %}"/>
-                </div>
-                <div class="small-1 columns">
-                  <a class="button secondary postfix" href="?">{% trans "Clear" %}</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-       {% endifnotequal %}
-
-	 {% if robohash %}
-	<div>
-	<a href="https://robohash.org/{{generate}}.png?size=200x200" download="verification-picture.jpg" title={{generate}}>
-    <img src="https://robohash.org/{{generate}}.png?size=200x200" alt="verification-picture">
-	</a>
-	</div>
-	{% endif %}
+      
 
       <table>
         <thead>
