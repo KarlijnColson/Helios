@@ -5,10 +5,12 @@ Helios Django Views
 Ben Adida (ben@adida.net)
 """
 
+from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.http import *
 from django.db import transaction
+from django.utils import translation
 
 from mimetypes import guess_type
 
@@ -16,6 +18,7 @@ import csv
 import urllib
 import os
 import base64
+import re
 
 from crypto import algs, electionalgs, elgamal
 from crypto import utils as cryptoutils
@@ -77,7 +80,8 @@ def get_election_govote_url(election):
 
 
 def get_castvote_url(cast_vote):
-    return settings.URL_HOST + reverse(castvote_shortcut, args=[cast_vote.vote_tinyhash])
+    translation.activate("en")
+    return settings.SECURE_URL_HOST + re.sub(r'^\/[a-z]{2}', '', reverse(castvote_shortcut, args=[cast_vote.vote_tinyhash]))
 
 
 ##
@@ -106,9 +110,9 @@ def user_reauth(request, user):
     # FIXME: should we be wary of infinite redirects here, and
     # add a parameter to prevent it? Maybe.
     login_url = "%s%s?%s" % (settings.SECURE_URL_HOST,
-                             reverse(auth_views.start, args=[user.user_type]),
-                             urllib.urlencode({'return_url':
-                                               request.get_full_path()}))
+    reverse(auth_views.start, args=[user.user_type]),
+    urllib.urlencode({'return_url': request.get_full_path()})
+)
     return HttpResponseRedirect(login_url)
 
 ##
@@ -1551,8 +1555,7 @@ def voters_list_pretty(request, election):
 
     # load a bunch of voters
     # voters = Voter.get_by_election(election, order_by=order_by)
-    voters = Voter.objects.filter(
-        election=election).order_by(order_by).defer('vote')
+    voters = Voter.objects.filter(election=election).order_by(order_by).defer('vote')
 
     if q != '':
         if election.use_voter_aliases:
@@ -1576,7 +1579,8 @@ def voters_list_pretty(request, election):
         'admin_p': admin_p,
         'email_voters': helios.VOTERS_EMAIL,
         'limit': limit,
-        'upload_p': helios.VOTERS_UPLOAD, 'q': q,
+        'upload_p': helios.VOTERS_UPLOAD, 
+	'q': q,
         'voter_files': voter_files,
         'categories': categories,
         'eligibility_category_id': eligibility_category_id

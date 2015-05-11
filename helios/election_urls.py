@@ -61,7 +61,7 @@ urlpatterns = patterns('',
   (r'^/compute_tally$', one_election_compute_tally),
   (r'^/combine_decryptions$', combine_decryptions),
 
-  # post audited ballot	- TRANSLATION? (STATIC)
+  # post audited ballot
   (r'^/post-audited-ballot', post_audited_ballot),
 
   # managing voters
@@ -79,13 +79,13 @@ urlpatterns = patterns('',
   (r'^/ballots/(?P<voter_uuid>[^/]+)/all$', voter_votes),
   (r'^/ballots/(?P<voter_uuid>[^/]+)/last$', voter_last_vote),
 
-# election voting-process actions  -- THESE NEED TO BE TRANSLATED 
+# election voting-process actions
    url(r'^/view$', one_election_view, name='one_election_view'),
    url(r'^/result$', one_election_result, name='one_election_result'),
    url(r'^/result_proof$', one_election_result_proof, name='one_election_result_proof'),
    url(r'^/audited-ballots/$', one_election_audited_ballots, name='one_election_auditted_ballots'),
 
-  # casting a ballot before we know who the voter is -- TRANSLATION?
+  # casting a ballot before we know who the voter is
    url(r'^/cast$', one_election_cast, name='one_election_cast'),
    url(r'^/cast_confirm$', one_election_cast_confirm, name='one_election_cast_confirm'),
    url(r'^/password_voter_login$', password_voter_login, name='password_voter_login'),
