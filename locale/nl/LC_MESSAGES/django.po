@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-11 12:13+0200\n"
+"POT-Creation-Date: 2015-05-14 13:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,7 +111,7 @@ msgid "single ballot verifier"
 msgstr "verificator"
 
 #: helios/templates/election_audited_ballots.html:35
-#: helios/templates/voters_list.html:221
+#: helios/templates/voters_list.html:187
 msgid "View"
 msgstr "Overzicht"
 
@@ -582,42 +582,26 @@ msgstr ""
 msgid "voter-name."
 msgstr "naam van de stemmer."
 
-#: helios/templates/voters_list.html:137 helios/templates/voters_list.html:140
+#: helios/templates/voters_list.html:136 helios/templates/voters_list.html:139
 #: venv/lib/python2.7/site-packages/django/contrib/admin/templates/admin/search_form.html:7
 msgid "Search"
 msgstr "Zoek"
 
-#: helios/templates/voters_list.html:143 helios/templates/voters_list.html:170
+#: helios/templates/voters_list.html:142
 #: venv/lib/python2.7/site-packages/django/forms/widgets.py:327
 msgid "Clear"
 msgstr "Wissen"
 
-#: helios/templates/voters_list.html:154
-msgid ""
-"Once you've found your verification-code you can generate the verification-"
-"picture here."
-msgstr ""
-"Wanneer je je verificatie-code hebt gevonden kan je hier de verificatie-"
-"afbeelding genereren."
-
-#: helios/templates/voters_list.html:164
-msgid "Verification-code"
-msgstr "Verificatie-code"
-
-#: helios/templates/voters_list.html:167
-msgid "Generate"
-msgstr "Genereer"
-
-#: helios/templates/voters_list.html:190
+#: helios/templates/voters_list.html:156
 #: venv/lib/python2.7/site-packages/django/contrib/comments/forms.py:96
 msgid "Name"
 msgstr "Naam"
 
-#: helios/templates/voters_list.html:194
+#: helios/templates/voters_list.html:160
 msgid "Alias"
 msgstr "Alias"
 
-#: helios/templates/voters_list.html:197
+#: helios/templates/voters_list.html:163
 msgid "Smart Ballot Tracker"
 msgstr "verificatie-code"
 
@@ -8877,6 +8861,19 @@ msgstr ""
 #, python-format
 msgid "Unknown token type: %s"
 msgstr ""
+
+#~ msgid ""
+#~ "Once you've found your verification-code you can generate the "
+#~ "verification-picture here."
+#~ msgstr ""
+#~ "Wanneer je je verificatie-code hebt gevonden kan je hier de verificatie-"
+#~ "afbeelding genereren."
+
+#~ msgid "Verification-code"
+#~ msgstr "Verificatie-code"
+
+#~ msgid "Generate"
+#~ msgstr "Genereer"
 
 #~ msgid ""
 #~ "When you prepare a ballot with Helios, you immediately receive a smart "

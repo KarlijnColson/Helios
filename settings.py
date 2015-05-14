@@ -11,6 +11,8 @@ def get_from_env(var, default):
 DEBUG = (get_from_env('DEBUG', '1') == '1')
 TEMPLATE_DEBUG = DEBUG
 
+SITE_ID = 1
+
 ADMINS = (
     ('Pieter Maene', 'p.maene@gmail.com'),
 )
@@ -57,9 +59,7 @@ TIME_ZONE = 'Europe/Brussels'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html.
-LANGUAGE_CODE = 'en-us'
-
-SITE_ID = 1
+LANGUAGE_CODE = 'en'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -106,10 +106,10 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     # Secure a bunch of things
     'djangosecure.middleware.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware'
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 from django.utils.translation import ugettext as _
@@ -118,9 +118,13 @@ LANGUAGES = (
     ('nl', _('Dutch')),
 )
 
+ROOT_PATH = os.path.dirname(__file__)
+
+LOCALE_PATHS = (os.path.join(ROOT_PATH, 'locale'),)
+
 ROOT_URLCONF = 'urls'
 
-ROOT_PATH = os.path.dirname(__file__)
+
 TEMPLATE_DIRS = (
     ROOT_PATH,
     os.path.join(ROOT_PATH, 'templates')

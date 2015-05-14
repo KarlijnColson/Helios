@@ -80,8 +80,8 @@ def get_election_govote_url(election):
 
 
 def get_castvote_url(cast_vote):
-    translation.activate("en")
-    return settings.SECURE_URL_HOST + re.sub(r'^\/[a-z]{2}', '', reverse(castvote_shortcut, args=[cast_vote.vote_tinyhash]))
+    language.activate("en") 
+    return settings.SECURE_URL_HOST + re.sub(r'^\/[a-z]{2}','', reverse(castvote_shortcut, args=[cast_vote.vote_tinyhash]))
 
 
 ##
@@ -166,7 +166,7 @@ def _election_vote_shortcut(request, election):
     """
     a hidden view behind the shortcut that performs the actual perm check
     """
-    vote_url = "%s/booth/vote.html?%s" % (settings.SECURE_URL_HOST, urllib.urlencode({'election_url': reverse(one_election, args=[election.uuid])}))
+    vote_url = "%s#%s/booth/vote.html?%s" % (settings.SECURE_URL_HOST, translation.get_language(), urllib.urlencode({'election_url': reverse(one_election, args=[election.uuid])}))
 
     test_cookie_url = "%s?%s" % (settings.SECURE_URL_HOST + reverse(test_cookie), urllib.urlencode({'continue_url': vote_url}))
 
@@ -234,8 +234,7 @@ def election_new(request):
             # is the short name valid
             if helios_utils.urlencode(election_params['short_name']) == election_params['short_name']:
                 election_params['uuid'] = str(uuid.uuid1())
-                election_params['cast_url'] = settings.SECURE_URL_HOST + \
-                    reverse(one_election_cast, args=[election_params['uuid']])
+                election_params['cast_url'] = settings.SECURE_URL_HOST + re.sub(r'^\/[a-z]{2}', '', reverse(one_election_cast, args=[election_params['uuid']]))
 
                 # registration starts closed
                 election_params['openreg'] = False
@@ -1232,8 +1231,7 @@ def one_election_cast_done(request, election):
     #   auth_views.do_local_logout(request)
 
     # tweet/fb your vote
-    socialbuttons_url = get_socialbuttons_url(
-        cv_url, 'I cast a vote in %s' % election.name)
+    socialbuttons_url = get_socialbuttons_url(cv_url, 'I cast a vote in %s' % election.name)
 
     # remote logout is happening asynchronously in an iframe to be modular given the logout mechanism
     # include_user is set to False if logout is happening

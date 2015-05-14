@@ -7,8 +7,8 @@ from django.conf import settings
 
 urlpatterns = patterns('',
     
-    url(r'^helios_auth/', include('helios_auth.urls')),
-    url(r'^helios/', include('helios.urls')),
+    (r'^helios_auth/', include('helios_auth.urls')),
+    (r'^helios/', include('helios.urls')),
 
     # SHOULD BE REPLACED BY APACHE STATIC PATH
     (r'booth/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.ROOT_PATH + '/helios_booth'}),
@@ -23,6 +23,6 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += i18n_patterns('',
-    url(r'^helios/', include('helios.urls')),
+    (r'^helios/', include('helios.urls')),
     
 )
