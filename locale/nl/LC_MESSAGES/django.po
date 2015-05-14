@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-14 13:34+0200\n"
+"POT-Creation-Date: 2015-05-14 14:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,7 +111,7 @@ msgid "single ballot verifier"
 msgstr "verificator"
 
 #: helios/templates/election_audited_ballots.html:35
-#: helios/templates/voters_list.html:187
+#: helios/templates/voters_list.html:222
 msgid "View"
 msgstr "Overzicht"
 
@@ -587,21 +587,37 @@ msgstr "naam van de stemmer."
 msgid "Search"
 msgstr "Zoek"
 
-#: helios/templates/voters_list.html:142
+#: helios/templates/voters_list.html:142 helios/templates/voters_list.html:169
 #: venv/lib/python2.7/site-packages/django/forms/widgets.py:327
 msgid "Clear"
 msgstr "Wissen"
 
-#: helios/templates/voters_list.html:156
+#: helios/templates/voters_list.html:153
+msgid ""
+"Once you've found your verification-code you can generate the verification-"
+"picture here."
+msgstr ""
+"Wanneer je je verificatie-code hebt gevonden kan je hier de verificatie-"
+"afbeelding genereren."
+
+#: helios/templates/voters_list.html:163
+msgid "Verification-code"
+msgstr "Verificatie-code"
+
+#: helios/templates/voters_list.html:166
+msgid "Generate"
+msgstr "Genereer"
+
+#: helios/templates/voters_list.html:191
 #: venv/lib/python2.7/site-packages/django/contrib/comments/forms.py:96
 msgid "Name"
 msgstr "Naam"
 
-#: helios/templates/voters_list.html:160
+#: helios/templates/voters_list.html:195
 msgid "Alias"
 msgstr "Alias"
 
-#: helios/templates/voters_list.html:163
+#: helios/templates/voters_list.html:198
 msgid "Smart Ballot Tracker"
 msgstr "verificatie-code"
 
@@ -7248,12 +7264,12 @@ msgstr ""
 
 #: venv/lib/python2.7/site-packages/django/utils/text.py:234
 msgid "or"
-msgstr ""
+msgstr "of"
 
 #. Translators: This string is used as a separator between list elements
 #: venv/lib/python2.7/site-packages/django/utils/text.py:251
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: venv/lib/python2.7/site-packages/django/utils/timesince.py:20
 #: venv/lib/python2.7/site-packages/djcelery/humanize.py:13
@@ -8861,19 +8877,6 @@ msgstr ""
 #, python-format
 msgid "Unknown token type: %s"
 msgstr ""
-
-#~ msgid ""
-#~ "Once you've found your verification-code you can generate the "
-#~ "verification-picture here."
-#~ msgstr ""
-#~ "Wanneer je je verificatie-code hebt gevonden kan je hier de verificatie-"
-#~ "afbeelding genereren."
-
-#~ msgid "Verification-code"
-#~ msgstr "Verificatie-code"
-
-#~ msgid "Generate"
-#~ msgstr "Genereer"
 
 #~ msgid ""
 #~ "When you prepare a ballot with Helios, you immediately receive a smart "
