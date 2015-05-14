@@ -166,7 +166,7 @@ def _election_vote_shortcut(request, election):
     """
     a hidden view behind the shortcut that performs the actual perm check
     """
-    vote_url = "%s#%s/booth/vote.html?%s" % (settings.SECURE_URL_HOST, translation.get_language(), urllib.urlencode({'election_url': reverse(one_election, args=[election.uuid])}))
+    vote_url = "%s/booth/vote.html?%s#%s" % (settings.SECURE_URL_HOST, urllib.urlencode({'election_url': reverse(one_election, args=[election.uuid])}), translation.get_language())
 
     test_cookie_url = "%s?%s" % (settings.SECURE_URL_HOST + reverse(test_cookie), urllib.urlencode({'continue_url': vote_url}))
 
@@ -326,7 +326,7 @@ def one_election_view(request, election):
     election_url = get_election_url(election)
     election_badge_url = get_election_badge_url(election)
 
-    vote_url = "%s/booth/vote.html?%s" % (settings.SECURE_URL_HOST, urllib.urlencode({'election_url': reverse(one_election, args=[election.uuid])}))
+    vote_url = "%s/booth/vote.html?%s#%s" % (settings.SECURE_URL_HOST, urllib.urlencode({'election_url': reverse(one_election, args=[election.uuid])}), translation.get_language())
 
     test_cookie_url = "%s?%s" % (reverse(test_cookie), urllib.urlencode({'continue_url': vote_url}))
 
@@ -981,6 +981,8 @@ def one_election_cast(request, election):
         return HttpResponseRedirect("%s%s" % (settings.SECURE_URL_HOST, reverse(one_election_view, args=[election.uuid])))
 
     user = get_user(request)
+    request.session['django_language'] = translation.get_language()
+
     encrypted_vote = request.POST['encrypted_vote']
 
     save_in_session_across_logouts(request, 'encrypted_vote', encrypted_vote)
@@ -1059,6 +1061,8 @@ def password_voter_login(request, election):
 
 @election_view()
 def one_election_cast_confirm(request, election):
+    request.session['language'] = translation.get_language()
+
     user = get_user(request)
 
     # if no encrypted vote, the user is reloading this page or otherwise
