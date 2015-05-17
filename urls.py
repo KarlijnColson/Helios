@@ -24,5 +24,6 @@ urlpatterns = patterns('',
 
 urlpatterns += i18n_patterns('',
     (r'^helios/', include('helios.urls')),
+    (r'booth/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.ROOT_PATH + '/helios_booth'}),
     
 )

@@ -80,9 +80,7 @@ def get_election_govote_url(election):
 
 
 def get_castvote_url(cast_vote):
-    language.activate("en") 
     return settings.SECURE_URL_HOST + re.sub(r'^\/[a-z]{2}','', reverse(castvote_shortcut, args=[cast_vote.vote_tinyhash]))
-
 
 ##
 # social buttons
