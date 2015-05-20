@@ -1,10 +1,14 @@
 {% extends TEMPLATE_BASE %}
 {% load i18n %}
+
 {% block title %}{% trans "Submit Your Vote in " %}{{election.name}}{% endblock %}
 
 {% load foundation %}
 
 {% block content %}
+<p class="text-center">
+<img src="/static/helios/5_flowNL_submit.png" width="40%" alt="Can't load the progress tracker"/>
+</p>
   <script language="javascript">
     $(document).ready(function() {
       $('#waiting_div').hide();

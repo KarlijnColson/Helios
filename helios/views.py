@@ -80,7 +80,7 @@ def get_election_govote_url(election):
 
 
 def get_castvote_url(cast_vote):
-    return settings.SECURE_URL_HOST + re.sub(r'^\/[a-z]{2}','', reverse(castvote_shortcut, args=[cast_vote.vote_tinyhash]))
+    return settings.SECURE_URL_HOST + re.sub(r'nl','', reverse(castvote_shortcut, args=[cast_vote.vote_tinyhash]))
 
 ##
 # social buttons
@@ -232,7 +232,7 @@ def election_new(request):
             # is the short name valid
             if helios_utils.urlencode(election_params['short_name']) == election_params['short_name']:
                 election_params['uuid'] = str(uuid.uuid1())
-                election_params['cast_url'] = settings.SECURE_URL_HOST + re.sub(r'^\/[a-z]{2}', '', reverse(one_election_cast, args=[election_params['uuid']]))
+                election_params['cast_url'] = settings.SECURE_URL_HOST + re.sub(r'nl', '', reverse(one_election_cast, args=[election_params['uuid']]))
 
                 # registration starts closed
                 election_params['openreg'] = False
@@ -979,7 +979,6 @@ def one_election_cast(request, election):
         return HttpResponseRedirect("%s%s" % (settings.SECURE_URL_HOST, reverse(one_election_view, args=[election.uuid])))
 
     user = get_user(request)
-    request.session['django_language'] = translation.get_language()
 
     encrypted_vote = request.POST['encrypted_vote']
 
@@ -1119,8 +1118,7 @@ def one_election_cast_confirm(request, election):
 
         # status update this vote
         if voter and voter.user.can_update_status():
-            status_update_label = voter.user.update_status_template(
-            ) % "your smart ballot tracker"
+            status_update_label = voter.user.update_status_template() % "your smart ballot tracker"
             status_update_message = "I voted in %s - my smart tracker is %s.. #heliosvoting" % (
                 get_election_url(election), cast_vote.vote_hash[:10])
         else:

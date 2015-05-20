@@ -1,1 +1,2 @@
-Vote{% if custom_subject %}: {{custom_subject|safe}}{% endif %}
+{% load i18n %}
+{% trans "Vote" %}{% if custom_subject %}: {{custom_subject|safe}}{% endif %}
