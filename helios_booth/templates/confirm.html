@@ -51,7 +51,7 @@
     {$T.index = 1;}
     <p>
 	<b style="font-size:1.4em;">
-      #{$T.question$index + 1}</u>: {$T.question.short_name}
+      <u>#{$T.question$index + 1}</u>: {$T.question.short_name}
 	[<a onclick="BOOTH.show_question({$T.question$index}); return false;" href="#">Edit</a>] <br />
       <b style="font-size:1.4em;">
         {#foreach $T.choices[$T.question$index] as choice}

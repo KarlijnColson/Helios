@@ -30,17 +30,15 @@
 
       <b style="font-size:1.4em;">
         {#foreach $T.choices[$T.question$index] as choice}
-	 <ul>
           <li>{$T.choice}</li>
         {#/for}
-	</ul>
       </b>
       {#if $T.choices[$T.question$index].length == 0}
 	&nbsp;&nbsp;&nbsp;
 	<FONT COLOR="#8B0000"><b>Je hebt niet gestemd voor deze vraag, ben je er zeker van dat je blanco wil stemmen?</FONT></b>
       {#elseif $T.choices[$T.question$index].length < $T.question.max}
         &nbsp;&nbsp;&nbsp;
-        [je hebt 'onder-stemd': je mag tot {$T.question.max} stemmen uitbrengen.]
+        [je hebt 'onder-stemt': je mag tot {$T.question.max} stemmen uitbrengen.]
       {#/if}
 
       &nbsp;&nbsp;&nbsp;
