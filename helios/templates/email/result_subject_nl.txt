@@ -1,1 +1,1 @@
-{% load i18n %}{% trans "Tally Released" %}{% if custom_subject %}: {{custom_subject|safe}}{% endif %}
+Resultaat bekend gemaakt{% if custom_subject %}: {{custom_subject|safe}}{% endif %}

@@ -1,1 +1,1 @@
-{% load i18n %} {% trans "Additional Information" %}{% if custom_subject %}: {{custom_subject|safe}}{% endif %}
+Additional Information {% if custom_subject %}: {{custom_subject|safe}}{% endif %}

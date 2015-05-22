@@ -1,9 +1,8 @@
-{% load i18n %}
-{% trans "Dear" %} {{voter.name}},{% if custom_message %}
+Dear {{voter.name}},{% if custom_message %}
 
 {{custom_message|safe}}{% endif %}
 
-{% trans "Election Link:" %} {{election_vote_url}}
+Election Link: {{election_vote_url}}
 
 --
 Helios

@@ -1,0 +1,20 @@
+Beste {{voter.name}},
+
+Het resultaat van {{election.name}} is berekend en vrijgegeven:
+
+  {{election_url}}{% if custom_messgae %}
+
+{{custom_message|safe}}{% endif %}
+{% if voter.vote_hash %}
+Jouw verificatie-code in deze verkiezing was:
+
+  {{voter.vote_hash}}
+
+Indien dit bericht foute informatie bevat, contacteer ons.
+{% else %}
+Het lijkt erop dat jij niet gestemt hebt in deze verkiezing. 
+Contacteer ons indien jij dacht dat je wel gestemd hebt. 
+{% endif %}
+
+--
+Helios
