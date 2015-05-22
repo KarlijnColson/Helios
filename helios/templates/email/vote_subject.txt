@@ -1,1 +1,1 @@
-Vote {% if custom_subject %}: {{custom_subject|safe}}{% endif %}
+Vote{% if custom_subject %} : {{custom_subject|safe}}{% endif %}
