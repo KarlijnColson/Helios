@@ -1,2 +1,1 @@
-{% load i18n %}
-{% trans "Tally Released" %}{% if custom_subject %}: {{custom_subject|safe}}{% endif %}
+{% load i18n %}{% trans "Tally Released" %}{% if custom_subject %}: {{custom_subject|safe}}{% endif %}
