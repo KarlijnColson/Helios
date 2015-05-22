@@ -1,0 +1,20 @@
+Beste {{voter.name}},{% if custom_message %}
+
+{{custom_message|safe}}{% endif %}
+
+Verkiezings-URL: {{election_vote_url}}
+Vingerafdruk verkiezing: {{voter.election.hash}}
+{% ifequal voter.voter_type "password" %}
+Jouw kiezers ID: {{voter.voter_login_id}}
+Jouw wachtwoord: {{voter.voter_password}}
+{% else %}
+e kan inloggen met jouw {{voter.voter_type|capfirst}} account om te stemmen in deze verkiezing.
+{% endifequal %}{% if election.use_voter_aliases %}
+Om je privacy te beschermen is deze verkiezing ingesteld om nooit je stem, ID, naam of e-mailadres publiekelijk te tonen. Integendeel, De lijst met verificatie codes zal enkel je alias tonen."
+
+Jouw kiezers alias is: {{voter.alias}}
+
+Het is belangrijk dat wanneer je gevraagd wordt om in te loggen dat je je *Kiezers ID* gebruikt en niet je alias.
+{% endif %}
+--
+Helios

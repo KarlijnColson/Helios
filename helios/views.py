@@ -1709,26 +1709,41 @@ def voters_email(request, election):
     if(translation.get_language() == 'nl'):
     	default_subject = render_template_raw(None, 'email/%s_subject_nl.txt' % template, {
         'custom_subject': "&lt;SUBJECT&gt;"
-    })
+    	})
+    	default_body = render_template_raw(None, 'email/%s_body_nl.txt' % template, {
+        	'election': election,
+        	'election_url': election_url,
+        	'election_vote_url': election_vote_url,
+        	'custom_subject': default_subject,
+        	'custom_message': '&lt;BODY&gt;',
+        	'voter': {
+            	'vote_hash': '<SMART_TRACKER>',
+            	'name': '<VOTER_NAME>',
+            	'voter_login_id': '<VOTER_LOGIN_ID>',
+            	'voter_password': '<VOTER_PASSWORD>',
+            	'voter_type': election.voter_set.all()[0].voter_type,
+            	'election': election
+        	}
+    	})
     else:
     	default_subject = render_template_raw(None, 'email/%s_subject.txt' % template, {
         'custom_subject': "&lt;SUBJECT&gt;"
-    })
-    default_body = render_template_raw(None, 'email/%s_body.txt' % template, {
-        'election': election,
-        'election_url': election_url,
-        'election_vote_url': election_vote_url,
-        'custom_subject': default_subject,
-        'custom_message': '&lt;BODY&gt;',
-        'voter': {
-            'vote_hash': '<SMART_TRACKER>',
-            'name': '<VOTER_NAME>',
-            'voter_login_id': '<VOTER_LOGIN_ID>',
-            'voter_password': '<VOTER_PASSWORD>',
-            'voter_type': election.voter_set.all()[0].voter_type,
-            'election': election
-        }
-    })
+    	})
+    	default_body = render_template_raw(None, 'email/%s_body.txt' % template, {
+        	'election': election,
+        	'election_url': election_url,
+        	'election_vote_url': election_vote_url,
+        	'custom_subject': default_subject,
+        	'custom_message': '&lt;BODY&gt;',
+        	'voter': {
+            	'vote_hash': '<SMART_TRACKER>',
+            	'name': '<VOTER_NAME>',
+            	'voter_login_id': '<VOTER_LOGIN_ID>',
+            	'voter_password': '<VOTER_PASSWORD>',
+            	'voter_type': election.voter_set.all()[0].voter_type,
+            	'election': election
+        	}
+    	})
 
     if request.method == "GET":
         email_form = forms.EmailVotersForm()
@@ -1743,10 +1758,12 @@ def voters_email(request, election):
             # the client knows to submit only once with a specific voter_id
 	    if(translation.get_language() == 'nl'):
             	subject_template = 'email/%s_subject_nl.txt' % template
+		body_template = 'email/%s_body_nl.txt' % template
 	    else:
 		subject_template = 'email/%s_subject.txt' % template
+		body_template = 'email/%s_body.txt' % template
 
-            body_template = 'email/%s_body.txt' % template
+         
 
             extra_vars = {
                 'custom_subject': email_form.cleaned_data['subject'],
