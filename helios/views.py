@@ -1706,14 +1706,14 @@ def voters_email(request, election):
 
     election_url = get_election_url(election)
     election_vote_url = get_election_govote_url(election)
-    if(translation.get_language() == 'nl' || translation.get_language() == 'nl-BE'){
-    default_subject = render_template_raw(None, 'email/%s_subject_nl.txt' % template, {
+    if(translation.get_language() == 'nl'):
+    	default_subject = render_template_raw(None, 'email/%s_subject_nl.txt' % template, {
         'custom_subject': "&lt;SUBJECT&gt;"
-    })}
-    else{
-    default_subject = render_template_raw(None, 'email/%s_subject.txt' % template, {
+    })
+    else:
+    	default_subject = render_template_raw(None, 'email/%s_subject.txt' % template, {
         'custom_subject': "&lt;SUBJECT&gt;"
-    })}
+    })
     default_body = render_template_raw(None, 'email/%s_body.txt' % template, {
         'election': election,
         'election_url': election_url,
