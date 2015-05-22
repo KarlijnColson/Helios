@@ -18,7 +18,7 @@ def vote_cast_send_message(user, voter, election, cast_vote, **kwargs):
     # Prepare the message
     if(translation.get_language() == 'nl'):
     	subject = "%s - Je hebt gestemd!" % election.name
-	translation.active('nl')
+	translation.activate('nl')
     	body = """
 	Je hebt succesvol een stem ingediend voor %s.
 
@@ -44,7 +44,7 @@ def vote_cast_send_message(user, voter, election, cast_vote, **kwargs):
 	"""
     else:
     	subject = "%s - Cast Vote" % election.name
-	translation.active('en')
+	translation.activate('en')
     	body = """
 	You have successfully cast a vote in %s.
 
