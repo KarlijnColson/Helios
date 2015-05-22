@@ -391,7 +391,10 @@
             });
 
             // Give warning that max number of options is selected.
-              $('#warning_box').html('Maximum number of options selected.<br />To change your selection, please de-select a current selection first.');
+		if(language ==0){
+              		$('#warning_box').html('Maximum number of options selected.<br />To change your selection, please de-select a current selection first.');}
+		else{
+              $('#warning_box').html('Maximum aantal opties geselecteerd.<br /> om je selectie te veranderen, deselecteer één van je opties.');}
           } else {
             // enable the other checkboxes
             $('.ballot_answer').each(function(i, checkbox) {
@@ -410,7 +413,8 @@
         };
 
         BOOTH.show_encryption_message_before = function(func_to_execute) {
-          BOOTH.show($('#encrypting_div'));
+          if(language ==0){BOOTH.show($('#encrypting_div'));}
+	  else{BOOTH.show($('#encrypting_div_nl'));}
           func_to_execute();
         };
 
@@ -699,6 +703,18 @@
           </h3>
 
           <p align="center"><b>This may take up to two minutes.</b>
+        </div>
+
+        <div id="encrypting_div_nl" class="panel" style="display:none;">
+          <h3 align="center">
+	    <img src="Media/key-icon.png" width="10%" />
+	    <br />
+            Helios encrypteert nu je stem...
+            <br />
+            <img src="encrypting.gif" /> <span style="font-size:0.7em; display:none;" id="percent_done_container">(<span id="percent_done">0</span>%)</span>
+          </h3>
+
+          <p align="center"><b>Dit kan tot twee minuten duren.</b>
         </div>
 
         <div id="seal_div" class="panel"></div>

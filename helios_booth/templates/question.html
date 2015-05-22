@@ -12,6 +12,13 @@
       <span style="font-size: 0.6em;">
         #{$T.question_num + 1} of {$T.last_question_num + 1}
         &mdash;
+	{#if $T.question.min && $T.question.min == $T.question.max}
+	  {#if $T.question.min == 1}
+		You have to choose exactly one.
+	  {#else}
+		You have to choose exactly {$T.question.min}. uitbrengen.
+	  {#/if}
+	{#/if}
         You can choose
         {#if $T.question.min && $T.question.min > 0}
           {#if $T.question.max && $T.question.max > $T.question.min}

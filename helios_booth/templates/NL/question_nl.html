@@ -11,12 +11,19 @@
     {#if $T.election_type != 'ranked election'}
       <span style="font-size: 0.6em;">
         #{$T.question_num + 1} van de {$T.last_question_num + 1}
-        &mdash; 
+        &mdash;
+	{#if $T.question.min && $T.question.min == $T.question.max}
+	  {#if $T.question.min == 1}
+		Je moet exact één stem uitbrengen.
+	  {#else}
+		Je moet exact {$T.question.min} stemmen uitbrengen.
+	  {#/if}
+	{#/if}
         {#if $T.question.min && $T.question.min > 0}
-          {#if $T.question.max}
+          {#if $T.question.max  && $T.question.max > $T.question.min}
             Je mag {$T.question.min} tot {$T.question.max} stemmen uitbrengen. - Je moet het minimum aanduiden voor je verder kan.
           {#else}
-           Je moet minstens {$T.question.min} stemmen uitbrengen om verder te kunnen.
+           Je moet minstens {$T.question.min} stemm(en) uitbrengen om verder te kunnen.
           {#/if}
         {#else}
           {#if $T.question.max}
