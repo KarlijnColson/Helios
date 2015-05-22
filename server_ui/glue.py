@@ -12,12 +12,13 @@ import helios.signals
 import views
 
 # TODO This doesn't work for voters that are not also users
+# TODO url is nog logic. Puts 'en-us' instead of 'en' or 'nl'
 
 def vote_cast_send_message(user, voter, election, cast_vote, **kwargs):
     # Prepare the message
     if(translation.get_language() == 'nl'):
     	subject = "%s - Je hebt gestemd!" % election.name
-
+	translation.active('nl')
     	body = """
 	Je hebt succesvol een stem ingediend voor %s.
 
@@ -43,7 +44,7 @@ def vote_cast_send_message(user, voter, election, cast_vote, **kwargs):
 	"""
     else:
     	subject = "%s - Cast Vote" % election.name
-
+	translation.active('en')
     	body = """
 	You have successfully cast a vote in %s.
 
