@@ -14,23 +14,23 @@
         &mdash;
 	{#if $T.question.min && $T.question.min == $T.question.max}
 	  {#if $T.question.min == 1}
-		You have to choose exactly one.
+		You have to choose <b>exactly one</b>
 	  {#else}
-		You have to choose exactly {$T.question.min}. uitbrengen.
-	  {#/if}
-	{#/if}
-        You can choose
-        {#if $T.question.min && $T.question.min > 0}
+		You have to choose <b>exactly {$T.question.min}</b> uitbrengen
+	  {#/if} before you can continue.
+       
+        {#elseif $T.question.min && $T.question.min > 0}
           {#if $T.question.max && $T.question.max > $T.question.min}
-            {$T.question.min} to {$T.question.max} - you need to select the minimum before you can continue.
+            You can choose <b>{$T.question.min} to {$T.question.max}</b> - you need to select the minimum before you can continue.
           {#else}
-            at least {$T.question.min} - you need to select the minimum before you can continue. 
+            You need to choose <b>at least {$T.question.min}</b>. - you need to select the minimum before you can continue. 
           {#/if}
         {#else}
+	  You may choose
           {#if $T.question.max}
-            {#if $T.question.max > 1}up to {#/if}{$T.question.max}
+            <b>{#if $T.question.max > 1}up to {#/if}{$T.question.max}</b>.
           {#else}
-            as many as you approve of
+            as many as you approve of.
           {#/if}
         {#/if}
       </span>

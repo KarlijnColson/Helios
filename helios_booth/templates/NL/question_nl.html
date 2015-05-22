@@ -14,21 +14,20 @@
         &mdash;
 	{#if $T.question.min && $T.question.min == $T.question.max}
 	  {#if $T.question.min == 1}
-		Je moet exact één stem uitbrengen.
+		Je moet <b>exact één</b> stem uitbrengen voor je verder kan.
 	  {#else}
-		Je moet exact {$T.question.min} stemmen uitbrengen.
+		Je moet <b>exact {$T.question.min}</b> stemmen uitbrengen voor je verder kan
 	  {#/if}
-	{#/if}
-        {#if $T.question.min && $T.question.min > 0}
+        {#elseif $T.question.min && $T.question.min > 0}
           {#if $T.question.max  && $T.question.max > $T.question.min}
-            Je mag {$T.question.min} tot {$T.question.max} stemmen uitbrengen. - Je moet het minimum aanduiden voor je verder kan.
+            Je mag <b>{$T.question.min} tot {$T.question.max}</b> stemmen uitbrengen. - Je moet het minimum aanduiden voor je verder kan.
           {#else}
-           Je moet minstens {$T.question.min} stemm(en) uitbrengen om verder te kunnen.
+           Je moet <b>minstens {$T.question.min}</b> stemm(en) uitbrengen om verder te kunnen.
           {#/if}
         {#else}
           {#if $T.question.max}
-	    {#if $T.question.max == 1}je mag maximaal {$T.question.max} stem uitbrengen. {#/if}
-            {#if $T.question.max > 1}je mag maximaal {$T.question.max} stemmen uitbrengen. {#/if}
+	    {#if $T.question.max == 1}je mag <b>maximaal één</b> stem uitbrengen. {#/if}
+            {#if $T.question.max > 1}je mag <b>maximaal {$T.question.max}</b> stemmen uitbrengen. {#/if}
           {#else}
             Je mag zoveel stemmen uitbrengen als je wilt
           {#/if}
