@@ -25,11 +25,11 @@ def vote_cast_send_message(user, voter, election, cast_vote, **kwargs):
 
  	   %s
 
-	De verkiezings-url is:
+	De verkiezings-info vind je op: 
 
-	  %s
+	%s
 
-	""" % (election.name, helios.views.get_castvote_url(cast_vote), election_vote_url)
+	""" % (election.name, helios.views.get_castvote_url(cast_vote), helios.views.get_election_url(election))
 
     	if election.use_voter_aliases:
         	body += """
@@ -55,7 +55,7 @@ def vote_cast_send_message(user, voter, election, cast_vote, **kwargs):
 
 	%s 
 
-	""" % (election.name, helios.views.get_castvote_url(cast_vote), election_vote_url)
+	""" % (election.name, helios.views.get_castvote_url(cast_vote), helios.views.get_election_url(election))
 
     	if election.use_voter_aliases:
         	body += """
