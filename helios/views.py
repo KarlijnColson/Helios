@@ -80,7 +80,7 @@ def get_election_govote_url(election):
 
 
 def get_castvote_url(cast_vote):
-    return settings.SECURE_URL_HOST + re.sub(r'nl','', reverse(castvote_shortcut, args=[cast_vote.vote_tinyhash]))
+    return settings.SECURE_URL_HOST + reverse(castvote_shortcut, args=[cast_vote.vote_tinyhash])
 
 ##
 # social buttons
