@@ -1744,7 +1744,7 @@ def voters_email(request, election):
 	    if(translation.get_language() == 'nl'):
             	subject_template = 'email/%s_subject_nl.txt' % template
 	    else:
-		subject_template = 'email/%s_subject_nl.txt' % template
+		subject_template = 'email/%s_subject.txt' % template
 
             body_template = 'email/%s_body.txt' % template
 
