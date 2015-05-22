@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-20 09:38+0200\n"
+"POT-Creation-Date: 2015-05-22 12:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -623,7 +623,7 @@ msgstr "verificatie-code"
 
 #: helios/templates/email/info_body.txt:2
 #: helios/templates/email/result_body.txt:2
-#: helios/templates/email/vote_body.txt:2
+#: helios/templates/email/vote_body_translated.txt:2
 msgid "Dear"
 msgstr "Beste"
 
@@ -631,7 +631,7 @@ msgstr "Beste"
 msgid "Election Link:"
 msgstr "Verkiezingslink: "
 
-#: helios/templates/email/info_subject.txt:2
+#: helios/templates/email/info_subject.txt:1
 msgid "Additional Information"
 msgstr "Bijkomende informatie:"
 
@@ -651,54 +651,55 @@ msgstr "Jouw verificatie-code in deze verkiezing was:"
 msgid "If you believe this message to be in error, please contact us."
 msgstr "Als je denkt dat dit bericht fout is, contacteer ons"
 
-#: helios/templates/email/result_subject.txt:2
+#: helios/templates/email/result_subject.txt:1
 msgid "Tally Released"
 msgstr "Resultaat vrijgegeven"
 
-#: helios/templates/email/vote_body.txt:6
+#: helios/templates/email/vote_body_translated.txt:6
 msgid "Election URL:"
 msgstr "Verkiezings-URL"
 
-#: helios/templates/email/vote_body.txt:7
+#: helios/templates/email/vote_body_translated.txt:7
 msgid "Election Fingerprint:"
 msgstr "Vingerafdruk verkiezing:"
 
-#: helios/templates/email/vote_body.txt:9
+#: helios/templates/email/vote_body_translated.txt:9
 msgid "Your voter ID:"
 msgstr " Jouw Stem ID:"
 
-#: helios/templates/email/vote_body.txt:10
+#: helios/templates/email/vote_body_translated.txt:10
 msgid "Your password:"
 msgstr "Jouw wachtwoord:"
 
-#: helios/templates/email/vote_body.txt:12
+#: helios/templates/email/vote_body_translated.txt:12
 msgid "You can login with your"
 msgstr "Je kan inloggen met jouw"
 
-#: helios/templates/email/vote_body.txt:12
+#: helios/templates/email/vote_body_translated.txt:12
 msgid " account to vote in this election."
 msgstr "account om te stemmen in deze verkiezing."
 
-#: helios/templates/email/vote_body.txt:14
+#: helios/templates/email/vote_body_translated.txt:14
 msgid ""
 "In order to protect your privacy, this election is configured to never "
 "display your voter login ID, name, or email address to the public. Instead, "
 "the ballot tracking center will only display your alias."
-msgstr "Om je privacy te beschermen is deze verkiezing ingesteld om nooit je Stem ID, naam of e-mailadres publiekelijk te tonen. Integendeel,De lijst met verificatie codes zal enkel je alias tonen."
+msgstr ""
+"Om je privacy te beschermen is deze verkiezing ingesteld om nooit je Stem "
+"ID, naam of e-mailadres publiekelijk te tonen. Integendeel,De lijst met "
+"verificatie codes zal enkel je alias tonen."
 
-#: helios/templates/email/vote_body.txt:16
+#: helios/templates/email/vote_body_translated.txt:16
 msgid "Your voter alias:"
 msgstr " Jouw kiezers alias is:"
 
-#: helios/templates/email/vote_body.txt:18
+#: helios/templates/email/vote_body_translated.txt:18
 msgid ""
 "It is important that when you are prompted to log in to vote that you use "
 "your *voter ID*, not your alias."
-msgstr "Het is belangrijk dat wanneer je gevraagd wordt om in te loggen dat je je *Stem ID* gebruikt en niet je alias."
-
-#: helios/templates/email/vote_subject.txt:2
-msgid "Vote"
-msgstr "Stem"
+msgstr ""
+"Het is belangrijk dat wanneer je gevraagd wordt om in te loggen dat je je "
+"*Stem ID* gebruikt en niet je alias."
 
 #: server_ui/templates/base.html:50
 msgid "Admin"
@@ -8956,6 +8957,9 @@ msgstr ""
 #, python-format
 msgid "Unknown token type: %s"
 msgstr ""
+
+#~ msgid "Vote"
+#~ msgstr "Stem"
 
 #~ msgid "This may take up to two minutes."
 #~ msgstr "Dit kan tot twee minuten duren."

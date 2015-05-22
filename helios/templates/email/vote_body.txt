@@ -1,21 +1,20 @@
-{% load i18n %}
-{% trans "Dear" %} {{voter.name}},{% if custom_message %}
+Dear{{voter.name}},{% if custom_message %}
 
 {{custom_message|safe}}{% endif %}
 
-{% trans "Election URL:" %} {{election_vote_url}}
-{% trans "Election Fingerprint:" %} {{voter.election.hash}}
+Election URL:{{election_vote_url}}
+Election Fingerprint:{{voter.election.hash}}
 {% ifequal voter.voter_type "password" %}
-{% trans "Your voter ID:" %} {{voter.voter_login_id}}
-{% trans "Your password:" %} {{voter.voter_password}}
+ Your voter ID:  {{voter.voter_login_id}}
+ Your password:  {{voter.voter_password}}
 {% else %}
-{% trans "You can login with your" %} {{voter.voter_type|capfirst}}{% trans " account to vote in this election." %}
+ You can login with your  {{voter.voter_type|capfirst}}  account to vote in this election. 
 {% endifequal %}{% if election.use_voter_aliases %}
-{% trans "In order to protect your privacy, this election is configured to never display your voter login ID, name, or email address to the public. Instead, the ballot tracking center will only display your alias." %}
+ In order to protect your privacy, this election is configured to never display your voter login ID, name, or email address to the public. Instead, the ballot tracking center will only display your alias. 
 
-{% trans "Your voter alias:" %} {{voter.alias}}
+ Your voter alias:  {{voter.alias}}
 
-{% trans "It is important that when you are prompted to log in to vote that you use your *voter ID*, not your alias." %}
+ It is important that when you are prompted to log in to vote that you use your *voter ID*, not your alias. 
 {% endif %}
 --
 Helios
