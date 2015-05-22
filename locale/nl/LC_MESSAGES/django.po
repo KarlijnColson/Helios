@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-22 15:45+0200\n"
+"POT-Creation-Date: 2015-05-22 19:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,7 @@ msgstr "Vingerafdruk"
 
 #: helios/templates/castvote.html:30
 msgid "Cast by"
-msgstr "Ingedient door"
+msgstr "Ingediend door"
 
 #: helios/templates/election_audited_ballots.html:4
 msgid "Audited Ballots for "
@@ -95,7 +95,7 @@ msgid ""
 "just here for auditing purposes, to spot-check that Helios is properly "
 "encrypting voter's choices."
 msgstr ""
-"Deze stemmen zijn <i>niet ingedient</i> en tellen dus niet mee. Ze zijn "
+"Deze stemmen zijn <i>niet ingediend</i> en tellen dus niet mee. Ze zijn "
 "enkel voor verificatie bedoelt, om na te kijken of Helios de stemmen van de "
 "kiezer juist encrypteert."
 
@@ -141,7 +141,7 @@ msgid ""
 "upload your encrypted vote to the server, please click on the button below.</"
 "b>"
 msgstr ""
-"We hebben je stem ontvangen, <b>maar nog niet ingedient</b>. Klik op "
+"We hebben je stem ontvangen, <b>maar nog niet ingediend</b>. Klik op "
 "onderstaande knop om je stem in te uploaden naar de server"
 
 #: helios/templates/election_cast_confirm.html:64
@@ -252,11 +252,11 @@ msgstr "Bevestig je stem in "
 
 #: helios/templates/election_cast_done.html:11
 msgid "Vote Successfully Cast!"
-msgstr "Stem succesvol ingedient!"
+msgstr "Stem succesvol ingediend!"
 
 #: helios/templates/election_cast_done.html:14
 msgid "Congratulations, your vote has been <b>successfully cast</b>!"
-msgstr "Proficiat, jouw stem is <b>succesvol ingedient</b>!"
+msgstr "Proficiat, jouw stem is <b>succesvol ingediend</b>!"
 
 #: helios/templates/election_cast_done.html:31
 msgid "For your safety, we have logged you out."
@@ -567,7 +567,7 @@ msgstr "zijn"
 
 #: helios/templates/voters_list.html:116
 msgid " cast."
-msgstr "ingedient."
+msgstr "ingediend."
 
 #: helios/templates/voters_list.html:118
 msgid "No votes were cast yet."
