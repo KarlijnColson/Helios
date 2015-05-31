@@ -46,7 +46,7 @@
         $('#verifier_loading').hide();
         $('#verifier').show();
       }, function() {
-        alert(Sorry, in-browser verification requires Java at this time.);
+        alert('Sorry, in-browser verification requires Java at this time.');
       });
     });
 
@@ -362,7 +362,11 @@
 
         <p>
           This tool will verify the tally of the specified election. The required data is retrieved from the server, but all calculations are done locally in your browser. </p>
-
+	</br> </br>
+<p>
+IMPORTANT: We want the user to know this tool needs quite a lot of computing power. It is possible your browser will complain or get stuck and the program can take up until 10 minutes.</p> </br></br>
+</p> IMPORTANT: This version of the tool does not work when you use Internet Explorer as your browser. Please, try a different browser.
+        </p>
 
         <p id="verifier_loading" class="text-center">
           <img src="/static/helios/loading.gif" />
