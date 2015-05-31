@@ -40,10 +40,10 @@ function verify_ballot(election_raw_json, encrypted_vote_json, status_cb) {
       
       // verify the encryption
       if (encrypted_vote.verifyEncryption(election.questions, election.public_key, ranking)) {
-          status_cb("Encryption Verified");
+          status_cb("Encryption Verified. (Do not close yet, we're still busy.)");
       } else {
           overall_result = false;
-          status_cb("PROBLEM = Encryption doesn't match.");
+          status_cb("PROBLEM = Encryption doesn't match. (Do not close yet, we're still busy.)");
       }
       
       // verify the proofs

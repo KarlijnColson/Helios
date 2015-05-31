@@ -273,18 +273,39 @@
 
 	//function to validate and confirm
         BOOTH.validate_and_confirm = function(question_num) {
-          if (BOOTH.validate_question(question_num))
-            BOOTH.seal_ballot();
+          if (BOOTH.validate_question(question_num)){
+            BOOTH.seal_ballot();}
+	  else{
+		 // Give warning that min number of options is not yet selected.
+		if(language ==0){
+              		$('#Minimum_box').html('! Minimum number of options not yet selected.<br />Please select the minimum number. !');}
+		else{
+              $('#Minimum_box').html('! Minimum aantal opties nog niet geselecteerd.<br /> Selecteer alsjeblieft eerst het minimum aantal opties. !');}
+		}
         };
 
         BOOTH.next = function(question_num) {
-          if (BOOTH.validate_question(question_num))
-            BOOTH.show_question(question_num + 1);
+          if (BOOTH.validate_question(question_num)){
+            BOOTH.show_question(question_num + 1);}
+	  else{
+		 // Give warning that min number of options is not yet selected.
+		if(language ==0){
+              		$('#Minimum_box').html('! Minimum number of options not yet selected.<br />Please select the minimum number. !');}
+		else{
+              $('#Minimum_box').html('! Minimum aantal opties nog niet geselecteerd.<br /> Selecteer alsjeblieft eerst het minimum aantal opties. !');}
+		}
         };
 
         BOOTH.previous = function(question_num) {
-          if (BOOTH.validate_question(question_num))
-            BOOTH.show_question(question_num - 1);
+          if (BOOTH.validate_question(question_num)){
+            BOOTH.show_question(question_num - 1);}
+	  else{
+		 // Give warning that min number of options is not yet selected.
+		if(language ==0){
+              		$('#Minimum_box').html('You have to select the minimum number of options for this question before you can go back.');}
+		else{
+              $('#Minimum_box').html('Je moet het minimum aantal opties voor deze vraag aanduiden voor je terugkan.');}
+		}
         };
 
         // http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -688,6 +709,10 @@
 	<div id="instrNL_div" class="panel"></div>
         <div id="confirm_div" class="panel"></div>
 	<div id="confirmNL_div" class="panel"></div>
+
+	<div id="noMin_div" class="panel" style="display:none;">
+		<h3 align="center">You need to select the minumun before you can continue....</h3>
+	</div>
 
         <div id="processing_div" class="panel" style="display:none;">
           <h3 align="center">Processing....</h3>

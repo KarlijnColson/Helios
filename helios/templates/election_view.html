@@ -196,8 +196,8 @@
       <h3>{% trans "Audit" %}</h3>
 
       {% if election.frozen_at %}
-        <a class="button" href="{% url helios.views.voters_list_pretty election.uuid %}">{% trans "Ballot Tracking Center" %}</a>
-        <a class="button" href="{% url helios.views.one_election_audited_ballots election.uuid %}">{% trans "Audited Ballots" %}</a>
+        <a class="button" href="{% url helios.views.voters_list_pretty election.uuid %}">{% trans "Casted Votes" %}</a>
+        <a class="button" href="{% url helios.views.one_election_audited_ballots election.uuid %}">{% trans "Verified Votes" %}</a>
 
         {% if not election.voting_has_started %}
           <a class="button" href="{{SECURE_URL_HOST}}/booth/vote.html?election_url={% url helios.views.one_election election.uuid %}">{% trans "Preview Booth" %}</a>
@@ -206,7 +206,7 @@
 
       {% if election.voting_has_stopped %}
         {% if election.result %}
-          <a class="button" target="_blank" href="/verifier/verify.html?election_url={% url helios.views.one_election election.uuid %}">{% trans "Verify Election Tally" %}</a>
+          <a class="button" target="_blank" href="/verifier/verify.html?election_url={% url helios.views.one_election election.uuid %}">{% trans "Verify Election Result" %}</a>
         {% endif %}
 
         <a class="button" href="{{vote_url}}">{% trans "Review the Voting Booth" %}</a>

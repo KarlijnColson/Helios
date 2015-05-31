@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-22 19:11+0200\n"
+"POT-Creation-Date: 2015-05-31 15:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,7 +111,7 @@ msgid "single ballot verifier"
 msgstr "verificator"
 
 #: helios/templates/election_audited_ballots.html:35
-#: helios/templates/voters_list.html:222
+#: helios/templates/voters_list.html:227
 msgid "View"
 msgstr "Overzicht"
 
@@ -344,7 +344,7 @@ msgstr " van de "
 msgid " voters cast their vote, or  "
 msgstr " mogelijke stemmers hebben gestemd, of "
 
-#: helios/templates/election_view.html:85
+#: helios/templates/election_view.html:85 helios_verifier/verify.html:252
 msgid "Tally"
 msgstr "Uitslag"
 
@@ -432,11 +432,11 @@ msgid "Audit"
 msgstr "Verificaties"
 
 #: helios/templates/election_view.html:199
-msgid "Ballot Tracking Center"
-msgstr "Verificatie codes lijst"
+msgid "Casted Votes"
+msgstr "Ingediende stemmen"
 
 #: helios/templates/election_view.html:200
-msgid "Audited Ballots"
+msgid "Verified Votes"
 msgstr "Geverifieerde stemmen"
 
 #: helios/templates/election_view.html:203
@@ -444,18 +444,18 @@ msgid "Preview Booth"
 msgstr "Bekijk het stemsysteem"
 
 #: helios/templates/election_view.html:209
-msgid "Verify Election Tally"
+msgid "Verify Election Result"
 msgstr "Verifieer de uitslag"
 
 #: helios/templates/election_view.html:212
 msgid "Review the Voting Booth"
 msgstr "Herbekijk het stemsysteem"
 
-#: helios/templates/election_view.html:217
+#: helios/templates/election_view.html:217 helios_verifier/verify.html:378
 msgid "Election URL"
 msgstr "Verkiezings-URL"
 
-#: helios/templates/election_view.html:221
+#: helios/templates/election_view.html:221 helios_verifier/verify.html:412
 msgid "Election Fingerprint"
 msgstr "Vingerafdruk verkiezing"
 
@@ -534,20 +534,20 @@ msgid "Password"
 msgstr "Wachtwoord"
 
 #: helios/templates/voters_list.html:4
-msgid "Voters and Ballot Tracking Center for "
-msgstr "Lijst met Stemmen en Verificatie codes voor"
+msgid "List of casted ballots for "
+msgstr "Lijst van ingediende stemmen voor "
 
 #: helios/templates/voters_list.html:14
-msgid "Voters and Ballot Tracking Center "
-msgstr "Lijst met Stemmen en Verificatie codes"
+msgid "List of casted ballots "
+msgstr "Lijst van ingediende stemmen "
 
 #: helios/templates/voters_list.html:23
 msgid "Only voters listed explicitly below can vote."
 msgstr "Enkel stemmers opgelijst beneden kunnen stemmen."
 
 #: helios/templates/voters_list.html:110
-msgid "Ballot Tracking Center "
-msgstr "Verificatie codes"
+msgid "Casted Ballots"
+msgstr "Ingediende stemmen"
 
 #: helios/templates/voters_list.html:116
 msgid " vote"
@@ -563,7 +563,7 @@ msgstr "is"
 
 #: helios/templates/voters_list.html:116
 msgid " were"
-msgstr "zijn"
+msgstr "zijn "
 
 #: helios/templates/voters_list.html:116
 msgid " cast."
@@ -573,53 +573,219 @@ msgstr "ingediend."
 msgid "No votes were cast yet."
 msgstr "Er zijn nog geen stemmen uitgebracht."
 
-#: helios/templates/voters_list.html:126
+#: helios/templates/voters_list.html:124
+msgid "Dear voter,"
+msgstr "Beste kiezer,"
+
+#: helios/templates/voters_list.html:125
+msgid ""
+"in the list below you can find al casted votes. On this list, you can check "
+"wether your vote was correctly recieved. For this, search for your "
+msgstr ""
+"in onderstaande lijst kan je alle ingediende stemmen vinden. Op deze lijst "
+"kan je checken of jouw stem correct is ontvangen. om dit te doen zoek naar "
+"jouw "
+
+#: helios/templates/voters_list.html:125
+msgid "voter-ID."
+msgstr "Kiezers-ID."
+
+#: helios/templates/voters_list.html:125
+msgid ""
+". Then check whether het verification-code is the same as the one you saved. "
+"If you saved the verification picture you can generate it below by copying "
+"the verification code in the list into the generator."
+msgstr ""
+". Check daarna of deze verificatie-code overeen komt met degene die jij hebt "
+"opgeslagen. Indien je de verificatie afbeelding hebt opgeslagen kan je deze "
+"eevoudig generen door de verificatie-code te kopiëren uit de lijst en te "
+"plakken in de generator."
+
+#: helios/templates/voters_list.html:132
 msgid "use this search-function to easily find your vote. Search by "
 msgstr ""
 "Gebruik deze zoek-functie om jouw stem eenvoudig terug te vinden. Zoek op "
 
-#: helios/templates/voters_list.html:126
+#: helios/templates/voters_list.html:132
 msgid "voter-name."
 msgstr "naam van de stemmer."
 
-#: helios/templates/voters_list.html:136 helios/templates/voters_list.html:139
+#: helios/templates/voters_list.html:142 helios/templates/voters_list.html:145
 #: venv/lib/python2.7/site-packages/django/contrib/admin/templates/admin/search_form.html:7
 msgid "Search"
 msgstr "Zoek"
 
-#: helios/templates/voters_list.html:142 helios/templates/voters_list.html:169
+#: helios/templates/voters_list.html:148 helios/templates/voters_list.html:174
 #: venv/lib/python2.7/site-packages/django/forms/widgets.py:327
 msgid "Clear"
 msgstr "Wissen"
 
-#: helios/templates/voters_list.html:153
+#: helios/templates/voters_list.html:159
 msgid ""
-"Once you've found your verification-code you can generate the verification-"
-"picture here."
+"Once you've found your verification-code in the list below you can generate "
+"the verification-picture by copying the code in the field below."
 msgstr ""
 "Wanneer je je verificatie-code hebt gevonden kan je hier de verificatie-"
-"afbeelding genereren."
+"afbeelding genereren door de code te kopiëren in het onderstaande veld."
 
-#: helios/templates/voters_list.html:163
+#: helios/templates/voters_list.html:168
 msgid "Verification-code"
 msgstr "Verificatie-code"
 
-#: helios/templates/voters_list.html:166
+#: helios/templates/voters_list.html:171
 msgid "Generate"
 msgstr "Genereer"
 
-#: helios/templates/voters_list.html:191
+#: helios/templates/voters_list.html:196
 #: venv/lib/python2.7/site-packages/django/contrib/comments/forms.py:96
 msgid "Name"
 msgstr "Naam"
 
-#: helios/templates/voters_list.html:195
+#: helios/templates/voters_list.html:200
 msgid "Alias"
 msgstr "Alias"
 
-#: helios/templates/voters_list.html:198
-msgid "Smart Ballot Tracker"
-msgstr "verificatie-code"
+#: helios/templates/voters_list.html:203
+msgid "Verification code"
+msgstr "Verificatie-code"
+
+#: helios_verifier/verify.html:50
+msgid "Sorry, in-browser verification requires Java at this time."
+msgstr "Sorry, voor verificatie in de browser is Java vereist."
+
+#: helios_verifier/verify.html:76 helios_verifier/verify.html.py:148
+msgid "Voter"
+msgstr "Kiezer"
+
+#: helios_verifier/verify.html:109
+msgid "Loading election"
+msgstr "Laden van de verkiezing"
+
+#: helios_verifier/verify.html:126
+msgid "Problem"
+msgstr "Probleem"
+
+#: helios_verifier/verify.html:126
+msgid ""
+"This election is not a straight-forward homomorphic-tally election. As a "
+"result, Helios cannot currently verify it."
+msgstr ""
+"Deze verkiezing is geen straigh-forward homomorpische verkiezing. Omwille "
+"hiervan kan Helios op dit moment de verkiezing niet verifiëren"
+
+#: helios_verifier/verify.html:132
+msgid "Loading voters"
+msgstr "Laden van de kiezers"
+
+#: helios_verifier/verify.html:136
+msgid "Loading ballots"
+msgstr "Laden van de stemmen"
+
+#: helios_verifier/verify.html:140
+msgid "Verifying ballots"
+msgstr "Stemmen aan het verifiëren"
+
+#: helios_verifier/verify.html:150
+msgid "Smart Ballot Tracker:"
+msgstr "verificatie-code:"
+
+#: helios_verifier/verify.html:151
+msgid "Questions"
+msgstr "Vragen"
+
+#: helios_verifier/verify.html:171 helios_verifier/verify.html.py:185
+#: helios_verifier/verify.html:248
+msgid "Question"
+msgstr "Vraag"
+
+#: helios_verifier/verify.html:180
+msgid "Option"
+msgstr "Optie"
+
+#: helios_verifier/verify.html:182
+msgid "Ciphertext"
+msgstr "Cijfertekst"
+
+#: helios_verifier/verify.html:193
+msgid "All ballots were verified."
+msgstr "Alle stemmen zijn geverifieërd"
+
+#: helios_verifier/verify.html:195
+msgid "One or more ballots failed verification."
+msgstr "Een of meer stemmen zijn gefaald bij verificatie."
+
+#: helios_verifier/verify.html:203
+msgid "Loading trustees"
+msgstr "Laden van de vertrouwenspersonen"
+
+#: helios_verifier/verify.html:222 helios_verifier/verify.html.py:279
+#: helios_verifier/verify.html:281
+msgid "Trustee"
+msgstr "Vertrouwenspersoon"
+
+#: helios_verifier/verify.html:227
+msgid "Public Key"
+msgstr "Publieke sleutel"
+
+#: helios_verifier/verify.html:235
+msgid "The election public key was verified."
+msgstr "De publieke sleutel van de verkiezing is geverifieërd."
+
+#: helios_verifier/verify.html:237
+msgid "The election public key failed verification."
+msgstr "De publieke sleutel is gefaald tijdens het verifiëren."
+
+#: helios_verifier/verify.html:273
+msgid "Decryption Factors"
+msgstr "Decryptie Factoren"
+
+#: helios_verifier/verify.html:301
+msgid "The tally was verified."
+msgstr "De resultaat van de verkiezing is geverifieërd."
+
+#: helios_verifier/verify.html:303
+msgid "The tally failed to verify."
+msgstr "Het resultaat van de verkiezing is gefaald tijdens het verifiëren."
+
+#: helios_verifier/verify.html:309
+msgid "The election was verified."
+msgstr "De volledige verkiezing is geverifieërd."
+
+#: helios_verifier/verify.html:311
+msgid "The election failed to verify."
+msgstr "De verkiezing is gefaald tijdens het verifiëren."
+
+#: helios_verifier/verify.html:365
+msgid ""
+"This tool will verify the tally of the specified election. The required data "
+"is retrieved from the server, but all calculations are done locally in your "
+"browser."
+msgstr ""
+"Dit programma zal het resultaat van deze gespecifieerde verkiezing natellen. "
+"De nodige data wordt van de server gehaald maar alle berekeningen gebeuren "
+"lokaal in je browser."
+
+#: helios_verifier/verify.html:367
+msgid ""
+"IMPORTANT: We want the user to know this tool needs quite a lot of computing "
+"power. It is possible your browser will complain or get stuck and the "
+"program can take up until 10 minutes."
+msgstr ""
+"BELANGRIJK: We willen dat de gebruiker zich ervan bewust is dat dit "
+"programma veel rekenkracht nodig heeft. Het is mogelijk dat je browser "
+"klaagt of vastloopt en het programma kon tot ongeveer 10 minuten duren."
+
+#: helios_verifier/verify.html:368
+msgid ""
+"IMPORTANT: This version of the tool does not work when you use Internet "
+"Explorer as your browser. Please, try a different browser."
+msgstr ""
+"BELANGRIJK: Deze versie van het programma werkt niet wanneer je werkt met "
+"Internet Explorer als je browser. Probeer een andere browser alsjeblieft."
+
+#: helios_verifier/verify.html:405
+msgid "Election Name"
+msgstr "Naam van de verkiezing"
 
 #: server_ui/templates/base.html:50
 msgid "Admin"
@@ -8878,6 +9044,24 @@ msgstr ""
 msgid "Unknown token type: %s"
 msgstr ""
 
+#~ msgid "Voters and Ballot Tracking Center for "
+#~ msgstr "Lijst met Stemmen en Verificatie codes voor"
+
+#~ msgid "Voters and Ballot Tracking Center "
+#~ msgstr "Lijst met Stemmen en Verificatie codes"
+
+#~ msgid "Ballot Tracking Center "
+#~ msgstr "Verificatie codes"
+
+#~ msgid "Smart Ballot Tracker"
+#~ msgstr "verificatie-code"
+
+#~ msgid "Ballot Tracking Center"
+#~ msgstr "Verificatie codes lijst"
+
+#~ msgid "Audited Ballots"
+#~ msgstr "Geverifieerde stemmen"
+
 #~ msgid "Dear"
 #~ msgstr "Beste"
 
@@ -8886,9 +9070,6 @@ msgstr ""
 
 #~ msgid "Additional Information"
 #~ msgstr "Bijkomende informatie:"
-
-#~ msgid "The tally for"
-#~ msgstr "Het resultaat voor"
 
 #~ msgid " has been computed and released:"
 #~ msgstr "is berekend en vrijgegeven:"
@@ -8939,14 +9120,8 @@ msgstr ""
 #~ "Het is belangrijk dat wanneer je gevraagd wordt om in te loggen dat je je "
 #~ "*Stem ID* gebruikt en niet je alias."
 
-#~ msgid "Vote"
-#~ msgstr "Stem"
-
 #~ msgid "This may take up to two minutes."
 #~ msgstr "Dit kan tot twee minuten duren."
-
-#~ msgid "Dear voter,"
-#~ msgstr "Beste kiezer,"
 
 #~ msgid "To cast a vote, you will be led through the following steps."
 #~ msgstr ""

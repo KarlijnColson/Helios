@@ -9,17 +9,17 @@
     <br />
 
     {#if $T.election_type != 'ranked election'}
-      <span style="font-size: 0.6em;">
+      <span style="font-size: 0.7em;">
         #{$T.question_num + 1} of {$T.last_question_num + 1}
         &mdash;
 	{#if $T.question.min && $T.question.min == $T.question.max}
 	  {#if $T.question.min == 1}
 		You have to choose <b>exactly one</b>
 	  {#else}
-		You have to choose <b>exactly {$T.question.min}</b> uitbrengen
-	  {#/if} before you can continue.
-       
-        {#elseif $T.question.min && $T.question.min > 0}
+		You have to choose <b>exactly {$T.question.min}</b> before you can continue. 
+	  {#/if} 
+       {#/if} 
+        {#if $T.question.min && $T.question.min > 0}
           {#if $T.question.max && $T.question.max > $T.question.min}
             You can choose <b>{$T.question.min} to {$T.question.max}</b> - you need to select the minimum before you can continue.
           {#else}
@@ -54,11 +54,8 @@
     <div id="warning_box" style="color: green; text-align:center; font-size: 0.8em; padding-top:10px; padding-bottom: 10px; height:50px;">
   </div>
 
-  {#if $T.show_reviewall}
-    <div style="float: right;">
-      <input type="button" onclick="BOOTH.validate_and_confirm({$T.question_num});" value="Proceed" />
-    </div>
-  {#/if}
+<div id="Minimum_box" style="color: red; text-align:center; font-size: 0.8em; padding-top:10px; padding-bottom: 10px; height:50px;">
+  </div>
 
   {#if $T.question_num != 0}
     <input type="button" onclick="BOOTH.previous({$T.question_num})" value="Previous" />
@@ -68,6 +65,11 @@
   {#if $T.question_num < $T.last_question_num}
     <input type="button" onclick="BOOTH.next({$T.question_num})" value="Next" />
     &nbsp;
+  {#/if}
+
+  {#if $T.show_reviewall}
+      <input type="button" onclick="BOOTH.validate_and_confirm({$T.question_num});" value="Proceed" />
+	&nbsp;
   {#/if}
 
   <br clear="both" />

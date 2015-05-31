@@ -48,15 +48,13 @@ def vote_cast_send_message(user, voter, election, cast_vote, **kwargs):
     	body = """
 	You have successfully cast a vote in %s.
 
-	Your ballot is archived at:
-
- 	   %s
-
 	The election URL is: 
 
 	%s 
 
-	""" % (election.name, helios.views.get_castvote_url(cast_vote), helios.views.get_election_url(election))
+	Here you can check whether your vote is correctly safed by checking the list with submitted votes.
+	If the election is private you will need to login with the same ID en password as you voted with. 
+	""" % (election.name, helios.views.get_election_url(election))
 
     	if election.use_voter_aliases:
         	body += """

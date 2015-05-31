@@ -1,7 +1,7 @@
 {% extends TEMPLATE_BASE %}
 {% load i18n %}
 
-{% block title %}{% trans "Voters and Ballot Tracking Center for " %}{{election.name}}{% endblock %}
+{% block title %}{% trans "List of casted ballots for " %}{{election.name}}{% endblock %}
 
 {% block content %}
   {% if admin_p %}
@@ -11,7 +11,7 @@
   <div class="row">
     <div class="large-12 columns">
       <h2>
-        {{election.name}}&mdash;{% trans "Voters and Ballot Tracking Center " %}{% if admin_p %}<small>[<a href="{% url helios.views.one_election_admin election.uuid %}">Back</a>]</small>{% else %}<small>[<a href="{% url helios.views.one_election_view election.uuid %}">{% trans "Back" %}</a>]</small>{% endif %}
+        {% trans "List of casted ballots " %}&mdash;{{election.name}} {% if admin_p %}<small>[<a href="{% url helios.views.one_election_admin election.uuid %}">Back</a>]</small>{% else %}<small>[<a href="{% url helios.views.one_election_view election.uuid %}">{% trans "Back" %}</a>]</small>{% endif %}
       </h2>
 
       <div data-alert class="alert-box info">
@@ -107,7 +107,7 @@
       {% endif %}
 
       <h3>
-        {% trans "Ballot Tracking Center " %}{% if voters and email_voters and election.frozen_at and admin_p %}<small>[<a href="{% url helios.views.voters_email election.uuid %}">E-mail All</a>]</small>{% endif %}
+        {% trans "Casted Ballots" %}{% if voters and email_voters and election.frozen_at and admin_p %}<small>[<a href="{% url helios.views.voters_email election.uuid %}">E-mail All</a>]</small>{% endif %}
       </h3>
 
       {% if voters %}
@@ -119,7 +119,13 @@
           {% endif %}
         </div>
       {% endif %}
-
+	<div class="row">
+	  <div class="large-12 columns">
+	{% trans "Dear voter," %} </br></br>
+	{% trans "in the list below you can find al casted votes. On this list, you can check wether your vote was correctly recieved. For this, search for your " %}{% if election.use_voter_aliases %}Alias{% else %}{% trans "voter-ID." %}{% endif %}{% trans ". Then check whether het verification-code is the same as the one you saved. If you saved the verification picture you can generate it below by copying the verification code in the list into the generator." %}
+	 </div>
+	</div>
+	</br>
       {% if election.num_voters > 20 %}
 	<div class="row">
 	  <div class="large-12 columns">
@@ -148,11 +154,10 @@
       {% endif %}
 
 {% ifnotequal admin_p 1 %}
-	<div>
-	<p><font size="3">
-	 {% trans "Once you've found your verification-code you can generate the verification-picture here." %}
- 	</font>
-	</p>
+	<div class="row">
+	  <div class="large-12 columns">
+	 {% trans "Once you've found your verification-code in the list below you can generate the verification-picture by copying the code in the field below." %}
+ 	</div>
 	</div>
 
  	<form method="get" action="{% url helios.views.voters_list_pretty election.uuid %}">
@@ -192,10 +197,10 @@
             {% endif %}
 
             {% if election.use_voter_aliases %}
-              <th width="20%">{% trans "Alias" %}</th>
+              <th width="10%">{% trans "Alias" %}</th>
             {% endif %}
 
-            <th width="40%">{% trans "Smart Ballot Tracker" %}</th>
+            <th width="40%">{% trans "Verification code" %}</th>
           </tr>
         </thead>
 
