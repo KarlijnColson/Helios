@@ -390,6 +390,8 @@
         };
 
         BOOTH.click_checkbox = function(question_num, answer_num, checked_p) {
+ 	   // make the minimum_box dissapear
+		 $('#Minimum_box').html("");
           // keep track of dirty answers that need encrypting
           BOOTH.dirty[question_num] = true;
 
@@ -722,7 +724,7 @@
           <h3 align="center">
 	    <img src="Media/key-icon.png" width="10%" />
 	    <br />
-            Helios is now encrypting your vote...
+            Helios is now encrypting (coding) your vote...
             <br />
             <img src="encrypting.gif" /> <span style="font-size:0.7em; display:none;" id="percent_done_container">(<span id="percent_done">0</span>%)</span>
           </h3>
@@ -734,7 +736,7 @@
           <h3 align="center">
 	    <img src="Media/key-icon.png" width="10%" />
 	    <br />
-            Helios encrypteert nu je stem...
+            Helios encrypteert (versleuteld) nu je stem...
             <br />
             <img src="encrypting.gif" /> <span style="font-size:0.7em; display:none;" id="percent_done_container">(<span id="percent_done">0</span>%)</span>
           </h3>
